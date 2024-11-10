@@ -22,12 +22,13 @@
         label {
             font-weight: bold;
             text-align: left;
+            font-size: 20px;
         }
         input {
             width: 100%;
             padding: 8px;
             margin: 8px 0;
-            font-size: 16px;
+            font-size: 20px;
             text-align: left;
         }
         button {
@@ -64,9 +65,9 @@
             <div class="hidden sm:block bg-gradient-to-r from-gray-900 to-[#cb6ce6]/80 rounded-3xl md:rounded-l-none p-[2px] w-full text-gray-100">
                 <div class="bg-black p-5 rounded-3xl md:rounded-l-none flex flex-col justify-between">
                     <label for="inputText" class="text-gray-200">Enter your text here</label>
-                    <input type="text" id="inputText" aria-label="Enter text to flip" placeholder="Enter text here..." class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <input type="text" id="inputText" aria-label="Enter text to flip" placeholder="please input the text here" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                    <label for="upsideDownText" class="text-gray-200">Upside Down Text:</label>
+                    <label for="upsideDownText" class="text-gray-200">Upside Down Text（Flip Text）:</label>
                     <div class="relative mb-4">
                         <input type="text" id="upsideDownText" class="bg-gray-900 block border-none outline-none resize-none w-full p-3 pb-8 text-xs sm:text-sm whitespace-pre-wrap overflow-hidden" readonly>
                         <button id="copy-upsideDownText" aria-label="Copy upside down text" class="absolute end-2 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center">Copy</button>
@@ -88,6 +89,17 @@
                     <div class="relative mb-4">
                         <input type="text" id="mirrorText" class="bg-gray-900 block border-none outline-none resize-none w-full p-3 pb-8 text-xs sm:text-sm whitespace-pre-wrap overflow-hidden" readonly>
                         <button id="copy-mirrorText" aria-label="Copy mirror text" class="absolute end-2 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center">Copy</button>
+                    </div>
+                    <label for="outlineText" class="text-gray-200">𝕆𝕦𝕥𝕝𝕚𝕟𝕖  𝔽𝕠𝕟𝕥:</label>
+                    <div class="relative mb-4">
+                        <input type="text" id="outlineText" class="bg-gray-900 block border-none outline-none resize-none w-full p-3 pb-8 text-lg sm:text-lg whitespace-pre-wrap overflow-hidden" readonly>
+                        <button id="copy-outlineText" aria-label="Copy outline text" class="absolute end-2 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center">Copy</button>
+                    </div>
+                    <label for="cursiveText" class="text-gray-200">𝓒𝓾𝓻𝓼𝓲𝓿𝓮 𝓛𝓮𝓽𝓽𝓮𝓻𝓼:</label>
+                    <div class="relative mb-4">
+                      
+                        <input type="text" id="cursiveText" class="bg-gray-900 block border-none outline-none resize-none w-full p-3 pb-8 text-lg sm:text-lg whitespace-pre-wrap overflow-hidden" readonly>
+                        <button id="copy-outlineText" aria-label="Copy outline text" class="absolute end-2 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 inline-flex items-center justify-center">Copy</button>
                     </div>
                 </div>
             </div>
@@ -656,49 +668,226 @@
     </footer>
 
     <script>
-        const flipTable = {
-          'a': 'ɐ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ', 'f': 'ɟ', 'g': 'ƃ', 'h': 'ɥ',
-        'i': 'ᴉ', 'j': 'ɾ', 'k': 'ʞ', 'l': 'l', 'm': 'ɯ', 'n': 'u', 'o': 'o', 'p': 'd',
-        'q': 'b', 'r': 'ɹ', 's': 's', 't': 'ʇ', 'u': 'n', 'v': 'ʌ', 'w': 'ʍ', 'x': 'x',
-        'y': 'ʎ', 'z': 'z', 'A': '∀', 'B': 'q', 'C': 'Ↄ', 'D': 'p', 'E': 'Ǝ', 'F': 'Ⅎ',
-        'G': 'פ', 'H': 'H', 'I': 'I', 'J': 'ſ', 'K': 'ʞ', 'L': '˥', 'M': 'W', 'N': 'N',
-        'O': 'O', 'P': 'Ԁ', 'Q': 'Q', 'R': 'ɹ', 'S': 'S', 'T': '┴', 'U': '∩', 'V': 'Λ',
-        'W': 'M', 'X': 'X', 'Y': '⅄', 'Z': 'Z', '0': '0', '1': 'Ɩ', '2': 'ᄅ', '3': 'Ɛ',
-        '4': '߈', '5': 'ဌ', '6': '9', '7': 'ㄥ', '8': '8', '9': '6', '.': '˙', ',': "'",
-        "'": ',', '"': '„', '`': ',', ';': '؛', '!': '¡', '?': '¿', '[': ']', ']': '[',
-        '(': ')', ')': '(', '{': '}', '}': '{', '<': '>', '>': '<', '&': '⅋', '_': '‾',
-        '!': '¡', '?': '¿', '@': '∀', '#': '⩤', '$': '($) ', '%': '٪', '^': 'ꓕ', '&': '⅋',
-        '*': '⋆', '(': ')', ')': '(', '[': ']', ']': '[', '{': '}', '}': '{', '<': '>', '>': '<',
-        '/': '\\', '\\': '/', '+': '➕', '-': '➖', '=': '⁼', '|': 'ǁ', '~': '˜', ':': 'ː',
-        ';': '؛', ',': "'", "'": ',', '.': '˙', '?': '¿', '!': '¡', '@': '∀', '#': '⩤',
-        '$': '($) ', '%': '٪', '^': 'ꓕ', '&': '⅋', '*': '⋆', '_': '‾', '=': '⁼', '+': '➕',
-        '-': '➖', '|': 'ǁ', '~': '˜', ':': 'ː', ';': '؛', ' ': ' ', '\n': '\n', '\r': '\r',
-        // ... (your existing flipTable object here)
-        // Add more emoji mappings
-        '😀': '🙃', '😁': '🙃', '😂': '🙃', '🤣': '🙃', '😃': '🙃', '😄': '🙃', '😅': '🙃',
-            '😆': '🙃', '😉': '🙃', '😊': '🙃', '😋': '🙃', '😎': '🙃', '😍': '🙃', '😘': '🙃',
-            '😗': '🙃', '😙': '🙃', '😚': '🙃', '☺️': '🙃', '🙂': '🙃', '🤗': '🙃', '🤩': '🙃',
-            '🤔': '🤔', '🤨': '🤨', '😐': '😑', '😑': '😐', '😶': '😶', '🙄': '🙄', '😏': '😏',
-            '😣': '😫', '😥': '😰', '😮': '😯', '🤐': '🤐', '😯': '😮', '😪': '😴', '😫': '😣',
-            '😴': '😪', '😌': '😌', '😛': '😜', '😜': '😛', '😝': '😜', '🤤': '🤤', '😒': '😒',
-            '😓': '😓', '😔': '😔', '😕': '🙃', '🙃': '😕', '🤑': '🤑', '😲': '😲', '☹️': '🙃',
-            '🙁': '🙃', '😖': '😣', '😞': '😔', '😟': '😕', '😤': '😤', '😢': '😭', '😭': '😢',
-            '😦': '😧', '😧': '😦', '😨': '😱', '😩': '😫', '🤯': '🤯', '😬': '😬', '😰': '😥',
-            '😱': '😨', '😳': '😳', '🤪': '🤪', '😵': '😵', '😡': '😠', '😠': '😡', '🤬': '🤬',
-            '😷': '😷', '🤒': '🤒', '🤕': '🤕', '🤢': '🤮', '🤮': '🤢', '🤧': '🤧', '😇': '😇',
-            '🤠': '🤠', '🤡': '🤡', '🤥': '🤥', '🤫': '🤫', '🤭': '🤭', '🧐': '🧐', '🤓': '🤓',
-            '😈': '👿', '👿': '😈', '👹': '👺', '👺': '👹', '💀': '💀', '👻': '👻', '👽': '👾',
-            '👾': '👽', '🤖': '🤖', '💩': '💩', '😺': '🙃', '😸': '🙃', '😹': '🙃', '😻': '🙃',
-            '😼': '😼', '😽': '😽', '🙀': '😿', '😿': '🙀', '😾': '😾', '🙈': '🙉', '🙉': '🙈',
-            '🙊': '🙊', '💋': '💋', '💌': '💌', '💘': '💝', '💝': '💘', '💖': '💗', '💗': '💖',
-            '💓': '💓', '💞': '💞', '💕': '💕', '💟': '💟', '❣️': '❣️', '💔': '💔', '❤️': '❤️',
-            '🧡': '🧡', '💛': '💛', '💚': '💚', '💙': '💙', '💜': '💜', '🖤': '🖤', '💯': '💯',
-            '💢': '💢', '💥': '💥', '💫': '💫', '💦': '💦', '💨': '💨', '🕳️': '🕳️', '💣': '💣',
-            '💬': '💭', '💭': '💬', '🗯️': '🗯️', '💤': '💤', '🗨️': '🗨️'
+  
+  const flipTable = {
+    'a': '\u0250', // ɐ
+    'b': '\u0071', // q
+    'c': '\u0254', // ɔ
+    'd': '\u0070', // p
+    'e': '\u01DD', // ǝ
+    'f': '\u025F', // ɟ
+    'g': '\u0183', // ƃ
+    'h': '\u0265', // ɥ
+    'i': '\u1D09', // ᶉ
+    'j': '\u027E', // ɾ
+    'k': '\u029E', // ʞ
+    'l': '\u006C', // l
+    'm': '\u026F', // ɯ
+    'n': '\u0075', // u
+    'o': '\u006F', // o
+    'p': '\u0064', // d
+    'q': '\u0062', // b
+    'r': '\u0279', // ɹ
+    's': '\u0073', // s
+    't': '\u0287', // ʇ
+    'u': '\u006E', // n
+    'v': '\u028C', // ʌ
+    'w': '\u028D', // ʍ
+    'x': '\u0078', // x
+    'y': '\u028E', // ʎ
+    'z': '\u007A', // z
+    'A': '\u2C6F', // ∀
+    'B': '\u15FA', // q
+    'C': '\u0186', // Ↄ
+    'D': '\u15E1', // p
+    'E': '\u018E', // Ǝ
+    'F': '\u2132', // Ⅎ
+    'G': '\u2141', // פ
+    'H': '\u0048', // H
+    'I': '\u0049', // I
+    'J': '\u148B', // ſ
+    'K': '\uA4D8', // ʞ
+    'L': '\u2142', // ˥
+    'M': '\uA7FD', // W
+    'N': '\u004E', // N
+    'O': '\u004F', // O
+    'P': '\u0500', // Ԁ
+    'Q': '\u1CA2', // Q
+    'R': '\u1D1A', // ɹ
+    'S': '\u0053', // S
+    'T': '\uA7B1', // ┴
+    'U': '\u0548', // ∩
+    'V': '\u039B', // Λ
+    'W': '\u004D', // M
+    'X': '\u0058', // X
+    'Y': '\u2144', // ⅄
+    'Z': '\u005A', // Z
+    '0': '\u0030', // 0
+    '1': '\u21C2', // Ɩ
+    '2': '\u1614', // ᄅ
+    '3': '\u0190', // Ɛ
+    '4': '\u07C8', // ߈
+    '5': '\u100C', // ဌ
+    '6': '\u0039', // 9
+    '7': '\u3125', // ㄥ
+    '8': '\u0038', // 8
+    '9': '\u0036', // 6
+    '.': '\u02D9', // ˙
+    ',': "'", // '
+    "'": ',', // ,
+    '"': '\u201E', // „
+    '`': ',', // ,
+    ';': '\u061B', // ؛  
+    '[': ']', // ]
+    ']': '[', // [
+    '(': ')', // )
+    ')': '(', // (
+    '{': '}', // }
+    '}': '{', // {
+    '<': '>', // >
+    '>': '<', // <
+    '&': '\u214B', // ⅋
+    '_': '\u0305', // ‾
+    '!': '\u00A1', // ¡
+    '?': '\u00BF', // ¿
+    '@': '\u2200', // ∀
+    '#': '\u29C4', // ⩤
+    '$': '($)', // ($)
+    '%': '\u066A', // ٪
+    '^': '\u02C7', // ꕵ
+    '*': '\u22C6', // ⋆
+    '/': '\\', // \
+    '\\': '/', // /
+    '+': '\u2795', // ➕
+    '-': '\u2796', // ➖
+    '=': '\u2261', // ≝
+    '|': '\u2016', // ǁ
+    '~': '\u0303', // ˜
+    ':': '\u02D0', // ː
+    '^': '\u2C75', // ꕵ
+    ' ': ' ', // 空格
+    '\n': '\n', // 换行
+    '\r': '\r' // 回车
+}; 
+const outlineFontMap = {
+            'a': '𝕒',
+            'b': '𝕓',
+            'c': '𝕔',
+            'd': '𝕕',
+            'e': '𝕖',
+            'f': '𝕗',
+            'g': '𝕘',
+            'h': '𝕙',
+            'i': '𝕚',
+            'j': '𝕛',
+            'k': '𝕜',
+            'l': '𝕝',
+            'm': '𝕞',
+            'n': '𝕟',
+            'o': '𝕠',
+            'p': '𝕡',
+            'q': '𝕢',
+            'r': '𝕣',
+            's': '𝕤',
+            't': '𝕥',
+            'u': '𝕦',
+            'v': '𝕧',
+            'w': '𝕨',
+            'x': '𝕩',
+            'y': '𝕪',
+            'z': '𝕫',
+            'A': '𝔸',
+            'B': '𝔹',
+            'C': 'ℂ',
+            'D': '𝔻',
+            'E': '𝔼',
+            'F': '𝔽',
+            'G': '𝔾',
+            'H': 'ℍ',
+            'I': '𝕀',
+            'J': '𝕁',
+            'K': '𝕂',
+            'L': '𝕃',
+            'M': '𝕄',
+            'N': 'ℕ',
+            'O': '𝕆',
+            'P': 'ℙ',
+            'Q': 'ℚ',
+            'R': 'ℝ',
+            'S': '𝕊',
+            'T': '𝕋',
+            'U': '𝕌',
+            'V': '𝕍',
+            'W': '𝕎',
+            'X': '𝕏',
+            'Y': '𝕐',
+            'Z': 'ℤ'
         };
 
+       
+
+        
+    
+
+        const cursiveFontMap = {
+            'a': '𝓪',
+            'b': '𝓫',
+            'c': '𝓬',
+            'd': '𝓭',
+            'e': '𝓮',
+            'f': '𝓯',
+            'g': '𝓰',
+            'h': '𝓱',
+            'i': '𝓲',
+            'j': '𝓳',
+            'k': '𝓴',
+            'l': '𝓵',
+            'm': '𝓶',
+            'n': '𝓷',
+            'o': '𝓸',
+            'p': '𝓹',
+            'q': '𝓺',
+            'r': '𝓻',
+            's': '𝓼',
+            't': '𝓽',
+            'u': '𝓾',
+            'v': '𝓿',
+            'w': '𝔀',
+            'x': '𝔁',
+            'y': '𝔂',
+            'z': '𝔃',
+            'A': '𝓐',
+            'B': '𝓑',
+            'C': '𝓒',
+            'D': '𝓓',
+            'E': '𝓔',
+            'F': '𝓕',
+            'G': '𝓖',
+            'H': '𝓗',
+            'I': '𝓘',
+            'J': '𝓙',
+            'K': '𝓚',
+            'L': '𝓛',
+            'M': '𝓜',
+            'N': '𝓝',
+            'O': '𝓞',
+            'P': '𝓟',
+            'Q': '𝓠',
+            'R': '𝓡',
+            'S': '𝓢',
+            'T': '𝓣',
+            'U': '𝓤',
+            'V': '𝓥',
+            'W': '𝓦',
+            'X': '𝓧',
+            'Y': '𝓨',
+            'Z': '𝓩',
+            ' ': ' ' // 空格
+        };
+
+       
         function flipText(text) {
-            return text.split('').map(c => flipTable[c] || c).reverse().join('');
+            return text.split('').map(c => flipTable[c] || c).join('');
         }
 
         function reverseText(text) {
@@ -706,7 +895,15 @@
         }
 
         function mirrorText(text) {
-            return text.split('').map(c => flipTable[c] || c).join('');
+            
+            return text.split('').map(c => flipTable[c] || c).reverse().join('');
+            
+        }
+        function toOutlineFont(text) {
+            return text.split('').map(c => outlineFontMap[c] || c).join('');
+        }
+        function toCursiveFont(text) {
+            return text.split('').map(c => cursiveFontMap[c] || c).join('');
         }
 
         const inputText = document.getElementById('inputText');
@@ -714,14 +911,26 @@
         const reversedFlipText = document.getElementById('reversedFlipText');
         const reverseTextElement = document.getElementById('reverseText');
         const mirrorTextElement = document.getElementById('mirrorText');
+        
+        const outlineText = document.getElementById('outlineText');
+        const cursiveText = document.getElementById('cursiveText');
 
-        inputText.addEventListener('input', function () {
+        
+
+        
+
+        inputText.addEventListener('input', updateText);
+        inputText.addEventListener('change', updateText);
+
+        function updateText() {
             const text = this.value;
             upsideDownText.value = flipText(text);
             reversedFlipText.value = reverseText(flipText(text));
             reverseTextElement.value = reverseText(text);
             mirrorTextElement.value = mirrorText(text);
-        });
+            outlineText.value = toOutlineFont(text);
+            cursiveText.value = toCursiveFont(text);
+        }
 
         function copyToClipboard(elementId) {
             try {
