@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Converter Online - Change Text Case</title>
+    <meta name="description" content="Convert text to uppercase, lowercase, title case, sentence case, and more with our online case converter tool.">
+    <link rel="shortcut icon" href="./favicon.png">
+    <script src="./tailwind.3.4.1.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+        }
+        .case-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .case-option {
+            background-color: #374151;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        .case-option:hover {
+            background-color: #4b5563;
+            transform: scale(1.02);
+        }
+        .case-option h3 {
+            color: #cb6ce6;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .case-option .example {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 font-sans">
+    <nav class="bg-black border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
+                    <li class="relative" id="tools-dropdown">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                            Tools
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <div id="tools-dropdown-menu" class="hidden absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                <li><a href="./zalgo-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Zalgo Text</a></li>
+                                <li><a href="./fancy-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Fancy Text</a></li>
+                                <li><a href="./strikethrough-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Strikethrough Text</a></li>
+                                <li><a href="./binary-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text ↔ Binary</a></li>
+                                <li><a href="./kaomoji-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kaomoji Generator</a></li>
+                                <li><a href="./ascii-art.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ASCII Art</a></li>
+                                <li><a href="./facebook-bold-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Facebook Bold Text</a></li>
+                                <li><a href="./bold-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bold Text Generator</a></li>
+                                <li><a href="./text-repeater.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text Repeater Online</a></li>
+                                <li><a href="./case-converter.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Case Converter Online</a></li>
+                                <li><a href="./unicode-text-cleaner.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Unicode Text Cleaner</a></li>
+                                <li><a href="./mocking-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mocking Text Generator</a></li>
+                                <li><a href="./emoji-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Emoji Text Generator</a></li>
+                                <li><a href="./upside-down-emoji.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Upside Down Emoji</a></li>
+                                <li><a href="./blank-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Blank Text Generator</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="./aboutus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">About</a></li>
+                    <li><a href="./contactus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Contact</a></li>
+                    <li><a href="./privacypolicy.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">Case Converter Online</h1>
+            
+            <div class="bg-black p-5 rounded-3xl">
+                <div class="mb-6">
+                    <label for="inputText" class="text-gray-200 block mb-2 text-left">Enter Your Text</label>
+                    <textarea 
+                        id="inputText" 
+                        placeholder="Type or paste your text here..."
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        rows="4"
+                    ></textarea>
+                </div>
+
+                <div class="case-options">
+                    <div class="case-option" onclick="convertCase('uppercase')">
+                        <h3>UPPERCASE</h3>
+                        <div class="example">HELLO WORLD</div>
+                    </div>
+                    <div class="case-option" onclick="convertCase('lowercase')">
+                        <h3>lowercase</h3>
+                        <div class="example">hello world</div>
+                    </div>
+                    <div class="case-option" onclick="convertCase('titlecase')">
+                        <h3>Title Case</h3>
+                        <div class="example">Hello World</div>
+                    </div>
+                    <div class="case-option" onclick="convertCase('sentencecase')">
+                        <h3>Sentence case</h3>
+                        <div class="example">Hello world</div>
+                    </div>
+                    <div class="case-option" onclick="convertCase('camelcase')">
+                        <h3>camelCase</h3>
+                        <div class="example">helloWorld</div>
+                    </div>
+                    <div class="case-option" onclick="convertCase('pascalcase')">
+                        <h3>PascalCase</h3>
+                        <div class="example">HelloWorld</div>
+                    </div>
+                    <div class="case-option" onclick="convertCase('snakecase')">
+                        <h3>snake_case</h3>
+                        <div class="example">hello_world</div>
+                    </div>
+                    <div class="case-option" onclick="convertCase('kebabcase')">
+                        <h3>kebab-case</h3>
+                        <div class="example">hello-world</div>
+                    </div>
+                    <div class="case-option" onclick="convertCase('alternating')">
+                        <h3>aLtErNaTiNg</h3>
+                        <div class="example">hElLo WoRlD</div>
+                    </div>
+                    <div class="case-option" onclick="convertCase('inverse')">
+                        <h3>iNVERSE cASE</h3>
+                        <div class="example">hELLO wORLD</div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label for="outputText" class="text-gray-200 block mb-2 text-left">Converted Text</label>
+                    <div class="relative">
+                        <textarea 
+                            id="outputText" 
+                            class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg"
+                            rows="4"
+                            readonly
+                            placeholder="Your converted text will appear here..."
+                        ></textarea>
+                        <button 
+                            class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                            onclick="copyToClipboard()"
+                        >
+                            Copy
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-gray-400 text-sm">
+                    <p>💡 Tips: Click any case option above to instantly convert your text. Perfect for coding, writing, and content creation.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function convertCase(caseType) {
+            const inputText = document.getElementById('inputText').value;
+            const outputTextarea = document.getElementById('outputText');
+            
+            if (!inputText.trim()) {
+                outputTextarea.value = '';
+                return;
+            }
+            
+            let convertedText = '';
+            
+            switch(caseType) {
+                case 'uppercase':
+                    convertedText = inputText.toUpperCase();
+                    break;
+                case 'lowercase':
+                    convertedText = inputText.toLowerCase();
+                    break;
+                case 'titlecase':
+                    convertedText = inputText.replace(/\w\S*/g, (txt) => 
+                        txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+                    );
+                    break;
+                case 'sentencecase':
+                    convertedText = inputText.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g, (c) => 
+                        c.toUpperCase()
+                    );
+                    break;
+                case 'camelcase':
+                    convertedText = inputText.replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => 
+                        index === 0 ? word.toLowerCase() : word.toUpperCase()
+                    ).replace(/\s+/g, '');
+                    break;
+                case 'pascalcase':
+                    convertedText = inputText.replace(/(?:^\w|[A-Z]|\b\w)/g, (word) => 
+                        word.toUpperCase()
+                    ).replace(/\s+/g, '');
+                    break;
+                case 'snakecase':
+                    convertedText = inputText.toLowerCase().replace(/\s+/g, '_').replace(/[^\w_]/g, '');
+                    break;
+                case 'kebabcase':
+                    convertedText = inputText.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+                    break;
+                case 'alternating':
+                    convertedText = inputText.split('').map((char, index) => 
+                        index % 2 === 0 ? char.toLowerCase() : char.toUpperCase()
+                    ).join('');
+                    break;
+                case 'inverse':
+                    convertedText = inputText.split('').map(char => 
+                        char === char.toUpperCase() ? char.toLowerCase() : char.toUpperCase()
+                    ).join('');
+                    break;
+                default:
+                    convertedText = inputText;
+            }
+            
+            outputTextarea.value = convertedText;
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('outputText');
+            outputText.select();
+            document.execCommand('copy');
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('tools-dropdown-menu');
+            dropdown.classList.toggle('hidden');
+        }
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('tools-dropdown');
+            const dropdownMenu = document.getElementById('tools-dropdown-menu');
+            
+            if (!dropdown.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html> 

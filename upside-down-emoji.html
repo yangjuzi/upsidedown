@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upside Down Emoji - Flip and Rotate Emojis</title>
+    <meta name="description" content="Turn emojis upside down and create rotated emoji effects for unique social media posts and messages.">
+    <link rel="shortcut icon" href="./favicon.png">
+    <script src="./tailwind.3.4.1.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+        }
+        .emoji-demo {
+            background-color: #374151;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .demo-emoji {
+            font-size: 48px;
+            margin: 10px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        .demo-emoji.flipped {
+            transform: rotate(180deg);
+        }
+        .emoji-effects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .emoji-effect {
+            background-color: #374151;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        .emoji-effect:hover {
+            background-color: #4b5563;
+            transform: scale(1.02);
+        }
+        .emoji-effect.active {
+            border-color: #cb6ce6;
+            background-color: #4b5563;
+        }
+        .emoji-effect h3 {
+            color: #cb6ce6;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .emoji-effect .example {
+            font-size: 24px;
+            margin: 8px 0;
+        }
+        .emoji-input {
+            background-color: #374151;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .emoji-picker {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            gap: 8px;
+            margin: 15px 0;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .emoji-item {
+            background-color: #4b5563;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-size: 20px;
+            border: 2px solid transparent;
+        }
+        .emoji-item:hover {
+            background-color: #6b7280;
+            transform: scale(1.1);
+        }
+        .emoji-item.selected {
+            border-color: #cb6ce6;
+        }
+        .result-preview {
+            background-color: #374151;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .preview-text {
+            font-size: 32px;
+            line-height: 1.5;
+            color: #fff;
+            margin-bottom: 15px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 font-sans">
+    <nav class="bg-black border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
+                    <li class="relative" id="tools-dropdown">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                            Tools
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <div id="tools-dropdown-menu" class="hidden absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                <li><a href="./zalgo-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Zalgo Text</a></li>
+                                <li><a href="./fancy-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Fancy Text</a></li>
+                                <li><a href="./strikethrough-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Strikethrough Text</a></li>
+                                <li><a href="./binary-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text ↔ Binary</a></li>
+                                <li><a href="./kaomoji-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kaomoji Generator</a></li>
+                                <li><a href="./ascii-art.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ASCII Art</a></li>
+                                <li><a href="./facebook-bold-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Facebook Bold Text</a></li>
+                                <li><a href="./bold-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bold Text Generator</a></li>
+                                <li><a href="./text-repeater.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text Repeater Online</a></li>
+                                <li><a href="./case-converter.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Case Converter Online</a></li>
+                                <li><a href="./unicode-text-cleaner.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Unicode Text Cleaner</a></li>
+                                <li><a href="./mocking-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mocking Text Generator</a></li>
+                                <li><a href="./emoji-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Emoji Text Generator</a></li>
+                                <li><a href="./upside-down-emoji.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Upside Down Emoji</a></li>
+                                <li><a href="./blank-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Blank Text Generator</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="./aboutus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">About</a></li>
+                    <li><a href="./contactus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Contact</a></li>
+                    <li><a href="./privacypolicy.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">Upside Down Emoji</h1>
+            
+            <div class="bg-black p-5 rounded-3xl">
+                <div class="emoji-demo">
+                    <h3 class="text-lg font-bold text-purple-400 mb-4">Transform Your Emojis</h3>
+                    <div class="demo-emoji">😊</div>
+                    <div class="demo-emoji flipped">😊</div>
+                    <div class="demo-emoji">🎉</div>
+                    <div class="demo-emoji flipped">🎉</div>
+                    <p class="text-gray-400 text-sm mt-4">Watch emojis flip and rotate for unique effects!</p>
+                </div>
+
+                <div class="mb-6">
+                    <label for="inputText" class="text-gray-200 block mb-2 text-left">Enter Text with Emojis</label>
+                    <textarea 
+                        id="inputText" 
+                        placeholder="Type your message with emojis here..."
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="emoji-input">
+                    <h3 class="text-lg font-bold text-purple-400 mb-4">Quick Emoji Selection</h3>
+                    <div class="emoji-picker" id="emojiPicker">
+                        <!-- Emojis will be populated here -->
+                    </div>
+                </div>
+
+                <div class="emoji-effects">
+                    <div class="emoji-effect active" onclick="setEffect('flip-all')" data-effect="flip-all">
+                        <h3>Flip All</h3>
+                        <div class="example" style="transform: rotate(180deg);">😊🎉✨</div>
+                    </div>
+                    <div class="emoji-effect" onclick="setEffect('flip-emojis')" data-effect="flip-emojis">
+                        <h3>Flip Emojis Only</h3>
+                        <div class="example">Hello <span style="transform: rotate(180deg); display: inline-block;">😊</span></div>
+                    </div>
+                    <div class="emoji-effect" onclick="setEffect('rotate-90')" data-effect="rotate-90">
+                        <h3>Rotate 90°</h3>
+                        <div class="example" style="transform: rotate(90deg);">😊🎉</div>
+                    </div>
+                    <div class="emoji-effect" onclick="setEffect('rotate-270')" data-effect="rotate-270">
+                        <h3>Rotate 270°</h3>
+                        <div class="example" style="transform: rotate(270deg);">😊🎉</div>
+                    </div>
+                    <div class="emoji-effect" onclick="setEffect('mirror')" data-effect="mirror">
+                        <h3>Mirror</h3>
+                        <div class="example" style="transform: scaleX(-1);">😊🎉</div>
+                    </div>
+                    <div class="emoji-effect" onclick="setEffect('random')" data-effect="random">
+                        <h3>Random</h3>
+                        <div class="example">😊<span style="transform: rotate(180deg); display: inline-block;">🎉</span></div>
+                    </div>
+                </div>
+
+                <div class="result-preview">
+                    <h3 class="text-lg font-bold text-purple-400 mb-4">Preview Result</h3>
+                    <div class="preview-text" id="emojiPreview">
+                        <span>Your transformed text will appear here...</span>
+                    </div>
+                    <button 
+                        onclick="applyEffect()"
+                        class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mr-2 transition-colors"
+                    >
+                        Apply Effect
+                    </button>
+                    <button 
+                        onclick="copyPreview()"
+                        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors"
+                    >
+                        Copy
+                    </button>
+                </div>
+
+                <div class="mb-6">
+                    <label for="outputText" class="text-gray-200 block mb-2 text-left">Transformed Text Output</label>
+                    <div class="relative">
+                        <textarea 
+                            id="outputText" 
+                            class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg"
+                            rows="4"
+                            readonly
+                            placeholder="Your transformed emoji text will appear here..."
+                        ></textarea>
+                        <button 
+                            class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                            onclick="copyToClipboard()"
+                        >
+                            Copy
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-gray-400 text-sm">
+                    <p>💡 Tips: Create unique visual effects with upside-down and rotated emojis! Perfect for adding creativity to your social media posts.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const commonEmojis = ['😊', '😂', '🤣', '😍', '🥰', '😘', '😉', '😎', '🤔', '😢', '😭', '😡', '🤯', '😴', '🤪', '🤗', '👍', '👎', '👏', '🙌', '💪', '🤝', '🙏', '❤️', '💕', '💖', '💯', '🔥', '✨', '⭐', '🎉', '🎊', '🎈', '🎁', '🌟', '💫', '🚀', '🌈', '☀️', '🌙'];
+        
+        let currentEffect = 'flip-all';
+
+        function initializeEmojiPicker() {
+            const emojiPicker = document.getElementById('emojiPicker');
+            commonEmojis.forEach(emoji => {
+                const emojiItem = document.createElement('div');
+                emojiItem.className = 'emoji-item';
+                emojiItem.textContent = emoji;
+                emojiItem.onclick = () => addEmojiToInput(emoji);
+                emojiPicker.appendChild(emojiItem);
+            });
+        }
+
+        function addEmojiToInput(emoji) {
+            const inputText = document.getElementById('inputText');
+            const cursorPos = inputText.selectionStart;
+            const textBefore = inputText.value.substring(0, cursorPos);
+            const textAfter = inputText.value.substring(cursorPos);
+            
+            inputText.value = textBefore + emoji + textAfter;
+            inputText.setSelectionRange(cursorPos + emoji.length, cursorPos + emoji.length);
+            inputText.focus();
+            
+            applyEffect();
+        }
+
+        function setEffect(effect) {
+            currentEffect = effect;
+            
+            // Update UI
+            document.querySelectorAll('.emoji-effect').forEach(effectEl => {
+                effectEl.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            applyEffect();
+        }
+
+        function applyEffect() {
+            const inputText = document.getElementById('inputText').value;
+            const outputTextarea = document.getElementById('outputText');
+            const emojiPreview = document.getElementById('emojiPreview');
+            
+            if (!inputText.trim()) {
+                outputTextarea.value = '';
+                emojiPreview.innerHTML = '<span>Your transformed text will appear here...</span>';
+                return;
+            }
+            
+            let transformedText = inputText;
+            let htmlPreview = inputText;
+            
+            // Unicode emoji regex
+            const emojiRegex = /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu;
+            
+            switch(currentEffect) {
+                case 'flip-all':
+                    htmlPreview = `<span style="transform: rotate(180deg); display: inline-block;">${inputText}</span>`;
+                    transformedText = '🙃' + inputText + '🙃'; // Add indicators since we can't actually rotate in plain text
+                    break;
+                    
+                case 'flip-emojis':
+                    htmlPreview = inputText.replace(emojiRegex, match => 
+                        `<span style="transform: rotate(180deg); display: inline-block;">${match}</span>`
+                    );
+                    transformedText = inputText.replace(emojiRegex, match => '🙃' + match);
+                    break;
+                    
+                case 'rotate-90':
+                    htmlPreview = `<span style="transform: rotate(90deg); display: inline-block;">${inputText}</span>`;
+                    transformedText = '↻' + inputText + '↻';
+                    break;
+                    
+                case 'rotate-270':
+                    htmlPreview = `<span style="transform: rotate(270deg); display: inline-block;">${inputText}</span>`;
+                    transformedText = '↺' + inputText + '↺';
+                    break;
+                    
+                case 'mirror':
+                    htmlPreview = `<span style="transform: scaleX(-1); display: inline-block;">${inputText}</span>`;
+                    transformedText = '🪞' + inputText + '🪞';
+                    break;
+                    
+                case 'random':
+                    const transforms = ['rotate(90deg)', 'rotate(180deg)', 'rotate(270deg)', 'scaleX(-1)'];
+                    htmlPreview = inputText.replace(emojiRegex, match => {
+                        const randomTransform = transforms[Math.floor(Math.random() * transforms.length)];
+                        return `<span style="transform: ${randomTransform}; display: inline-block;">${match}</span>`;
+                    });
+                    transformedText = inputText.replace(emojiRegex, match => {
+                        const indicators = ['↻', '🙃', '↺', '🪞'];
+                        const randomIndicator = indicators[Math.floor(Math.random() * indicators.length)];
+                        return randomIndicator + match;
+                    });
+                    break;
+                    
+                default:
+                    htmlPreview = inputText;
+                    transformedText = inputText;
+            }
+            
+            outputTextarea.value = transformedText;
+            emojiPreview.innerHTML = htmlPreview;
+        }
+
+        function copyPreview() {
+            const previewText = document.getElementById('outputText').value;
+            navigator.clipboard.writeText(previewText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('outputText');
+            outputText.select();
+            document.execCommand('copy');
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('tools-dropdown-menu');
+            dropdown.classList.toggle('hidden');
+        }
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('tools-dropdown');
+            const dropdownMenu = document.getElementById('tools-dropdown-menu');
+            
+            if (!dropdown.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('inputText').addEventListener('input', applyEffect);
+        
+        // Initialize
+        initializeEmojiPicker();
+        document.getElementById('inputText').value = "Hello World! 😊🎉✨";
+        applyEffect();
+    </script>
+</body>
+</html> 

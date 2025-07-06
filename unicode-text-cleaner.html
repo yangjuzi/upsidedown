@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unicode Text Cleaner - Clean and Normalize Text</title>
+    <meta name="description" content="Clean Unicode text by removing unwanted characters, normalizing whitespace, and converting special characters.">
+    <link rel="shortcut icon" href="./favicon.png">
+    <script src="./tailwind.3.4.1.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+        }
+        .clean-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .clean-option {
+            background-color: #374151;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        .clean-option:hover {
+            background-color: #4b5563;
+            transform: scale(1.02);
+        }
+        .clean-option h3 {
+            color: #cb6ce6;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .clean-option .description {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        .stats {
+            background-color: #374151;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .stats h3 {
+            color: #cb6ce6;
+            margin-bottom: 10px;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 8px;
+            background-color: #4b5563;
+            border-radius: 6px;
+        }
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 font-sans">
+    <nav class="bg-black border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
+                    <li class="relative" id="tools-dropdown">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                            Tools
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <div id="tools-dropdown-menu" class="hidden absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                <li><a href="./zalgo-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Zalgo Text</a></li>
+                                <li><a href="./fancy-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Fancy Text</a></li>
+                                <li><a href="./strikethrough-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Strikethrough Text</a></li>
+                                <li><a href="./binary-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text ↔ Binary</a></li>
+                                <li><a href="./kaomoji-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kaomoji Generator</a></li>
+                                <li><a href="./ascii-art.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ASCII Art</a></li>
+                                <li><a href="./facebook-bold-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Facebook Bold Text</a></li>
+                                <li><a href="./bold-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bold Text Generator</a></li>
+                                <li><a href="./text-repeater.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text Repeater Online</a></li>
+                                <li><a href="./case-converter.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Case Converter Online</a></li>
+                                <li><a href="./unicode-text-cleaner.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Unicode Text Cleaner</a></li>
+                                <li><a href="./mocking-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mocking Text Generator</a></li>
+                                <li><a href="./emoji-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Emoji Text Generator</a></li>
+                                <li><a href="./upside-down-emoji.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Upside Down Emoji</a></li>
+                                <li><a href="./blank-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Blank Text Generator</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="./aboutus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">About</a></li>
+                    <li><a href="./contactus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Contact</a></li>
+                    <li><a href="./privacypolicy.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">Unicode Text Cleaner</h1>
+            
+            <div class="bg-black p-5 rounded-3xl">
+                <div class="mb-6">
+                    <label for="inputText" class="text-gray-200 block mb-2 text-left">Text to Clean</label>
+                    <textarea 
+                        id="inputText" 
+                        placeholder="Paste your text here to clean and normalize..."
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        rows="4"
+                    ></textarea>
+                </div>
+
+                <div class="clean-options">
+                    <div class="clean-option" onclick="cleanText('basic')">
+                        <h3>Basic Clean</h3>
+                        <div class="description">Remove extra spaces and normalize line breaks</div>
+                    </div>
+                    <div class="clean-option" onclick="cleanText('diacritics')">
+                        <h3>Remove Diacritics</h3>
+                        <div class="description">Convert accented characters (café → cafe)</div>
+                    </div>
+                    <div class="clean-option" onclick="cleanText('invisible')">
+                        <h3>Remove Invisible</h3>
+                        <div class="description">Remove zero-width and control characters</div>
+                    </div>
+                    <div class="clean-option" onclick="cleanText('emojis')">
+                        <h3>Remove Emojis</h3>
+                        <div class="description">Strip all emoji characters</div>
+                    </div>
+                    <div class="clean-option" onclick="cleanText('numbers')">
+                        <h3>Remove Numbers</h3>
+                        <div class="description">Remove all numeric characters</div>
+                    </div>
+                    <div class="clean-option" onclick="cleanText('punctuation')">
+                        <h3>Remove Punctuation</h3>
+                        <div class="description">Strip punctuation marks</div>
+                    </div>
+                    <div class="clean-option" onclick="cleanText('special')">
+                        <h3>Remove Special</h3>
+                        <div class="description">Remove non-alphanumeric characters</div>
+                    </div>
+                    <div class="clean-option" onclick="cleanText('complete')">
+                        <h3>Complete Clean</h3>
+                        <div class="description">Apply all cleaning options</div>
+                    </div>
+                </div>
+
+                <div class="stats" id="textStats">
+                    <h3>Text Statistics</h3>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="charCount">0</div>
+                            <div class="stat-label">Characters</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="wordCount">0</div>
+                            <div class="stat-label">Words</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="lineCount">0</div>
+                            <div class="stat-label">Lines</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="specialCount">0</div>
+                            <div class="stat-label">Special Chars</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label for="outputText" class="text-gray-200 block mb-2 text-left">Cleaned Text</label>
+                    <div class="relative">
+                        <textarea 
+                            id="outputText" 
+                            class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg"
+                            rows="4"
+                            readonly
+                            placeholder="Your cleaned text will appear here..."
+                        ></textarea>
+                        <button 
+                            class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                            onclick="copyToClipboard()"
+                        >
+                            Copy
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-gray-400 text-sm">
+                    <p>💡 Tips: Use this tool to clean messy text copied from PDFs, websites, or documents. Perfect for preprocessing text for analysis or publishing.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function updateStats(text) {
+            const charCount = text.length;
+            const wordCount = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const lineCount = text.split('\n').length;
+            const specialCount = (text.match(/[^\w\s]/g) || []).length;
+            
+            document.getElementById('charCount').textContent = charCount;
+            document.getElementById('wordCount').textContent = wordCount;
+            document.getElementById('lineCount').textContent = lineCount;
+            document.getElementById('specialCount').textContent = specialCount;
+        }
+
+        function cleanText(cleanType) {
+            const inputText = document.getElementById('inputText').value;
+            const outputTextarea = document.getElementById('outputText');
+            
+            if (!inputText.trim()) {
+                outputTextarea.value = '';
+                updateStats('');
+                return;
+            }
+            
+            let cleanedText = inputText;
+            
+            switch(cleanType) {
+                case 'basic':
+                    cleanedText = cleanedText
+                        .replace(/\s+/g, ' ')
+                        .replace(/\n\s*\n/g, '\n')
+                        .trim();
+                    break;
+                case 'diacritics':
+                    cleanedText = cleanedText.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                    break;
+                case 'invisible':
+                    cleanedText = cleanedText
+                        .replace(/[\u200B-\u200D\uFEFF]/g, '')
+                        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
+                    break;
+                case 'emojis':
+                    cleanedText = cleanedText.replace(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '');
+                    break;
+                case 'numbers':
+                    cleanedText = cleanedText.replace(/[0-9]/g, '');
+                    break;
+                case 'punctuation':
+                    cleanedText = cleanedText.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+                    break;
+                case 'special':
+                    cleanedText = cleanedText.replace(/[^\w\s]/g, '');
+                    break;
+                case 'complete':
+                    cleanedText = cleanedText
+                        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                        .replace(/[\u200B-\u200D\uFEFF]/g, '')
+                        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
+                        .replace(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '')
+                        .replace(/[^\w\s]/g, '')
+                        .replace(/\s+/g, ' ')
+                        .trim();
+                    break;
+                default:
+                    cleanedText = inputText;
+            }
+            
+            outputTextarea.value = cleanedText;
+            updateStats(cleanedText);
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('outputText');
+            outputText.select();
+            document.execCommand('copy');
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('tools-dropdown-menu');
+            dropdown.classList.toggle('hidden');
+        }
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('tools-dropdown');
+            const dropdownMenu = document.getElementById('tools-dropdown-menu');
+            
+            if (!dropdown.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('inputText').addEventListener('input', function() {
+            updateStats(this.value);
+        });
+    </script>
+</body>
+</html> 

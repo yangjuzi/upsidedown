@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>腐蚀文字生成器 - Zalgo Text Generator</title>
+    <meta name="description" content="生成腐蚀文字效果，创建神秘怪异的文本样式">
+    <link rel="shortcut icon" href="./favicon.png">
+    <script src="./tailwind.3.4.1.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+        }
+        label {
+            font-weight: bold;
+            text-align: left;
+            font-size: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            font-size: 20px;
+            text-align: left;
+        }
+        button {
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 font-sans">
+    <nav class="bg-black border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
+                    <li class="relative" id="tools-dropdown">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                            Tools
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <div id="tools-dropdown-menu" class="hidden absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                <li><a href="./zalgo-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Zalgo Text</a></li>
+                                <li><a href="./fancy-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Fancy Text</a></li>
+                                <li><a href="./strikethrough-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Strikethrough Text</a></li>
+                                <li><a href="./binary-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text ↔ Binary</a></li>
+                                <li><a href="./kaomoji-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kaomoji Generator</a></li>
+                                <li><a href="./ascii-art.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ASCII Art</a></li>
+                                <li><a href="./facebook-bold-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Facebook Bold Text</a></li>
+                                <li><a href="./bold-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bold Text Generator</a></li>
+                                <li><a href="./text-repeater.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text Repeater Online</a></li>
+                                <li><a href="./case-converter.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Case Converter Online</a></li>
+                                <li><a href="./unicode-text-cleaner.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Unicode Text Cleaner</a></li>
+                                <li><a href="./mocking-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mocking Text Generator</a></li>
+                                <li><a href="./emoji-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Emoji Text Generator</a></li>
+                                <li><a href="./upside-down-emoji.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Upside Down Emoji</a></li>
+                                <li><a href="./blank-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Blank Text Generator</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">腐蚀文字生成器</h1>
+            
+            <div class="bg-black p-5 rounded-3xl">
+                <div class="mb-6">
+                    <label for="inputText" class="text-gray-200 block mb-2">输入文本</label>
+                    <textarea 
+                        id="inputText" 
+                        placeholder="请输入你要转换的文本..."
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="mb-6">
+                    <label class="text-gray-200 block mb-2">腐蚀强度</label>
+                    <div class="flex items-center space-x-4">
+                        <label class="text-gray-200 text-sm">
+                            <input type="radio" name="intensity" value="light" checked class="mr-2">
+                            轻度
+                        </label>
+                        <label class="text-gray-200 text-sm">
+                            <input type="radio" name="intensity" value="medium" class="mr-2">
+                            中度
+                        </label>
+                        <label class="text-gray-200 text-sm">
+                            <input type="radio" name="intensity" value="heavy" class="mr-2">
+                            重度
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label for="zalgoText" class="text-gray-200 block mb-2">腐蚀文字结果</label>
+                    <div class="relative">
+                        <textarea 
+                            id="zalgoText" 
+                            class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg"
+                            rows="4"
+                            readonly
+                        ></textarea>
+                        <button 
+                            id="copyBtn" 
+                            class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2"
+                            onclick="copyToClipboard()"
+                        >
+                            复制
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-gray-400 text-sm">
+                    <p>💡 提示：腐蚀文字也称为Zalgo文字，通过在字符上下添加特殊Unicode字符来创建怪异的视觉效果。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Zalgo characters arrays
+        const zalgoUp = [
+            '̍', '̎', '̄', '̅', '̿', '̑', '̆', '̐', '͒', '͗', '͑', '̇', '̈', '̊', '͂', '̓', '̈', '͊', '͋', '͌', '̃', '̂', '̌', '͐', '̀', '́', '̋', '̏', '̒', '̓', '̔', '̽', '̉', 'ͣ', 'ͤ', 'ͥ', 'ͦ', 'ͧ', 'ͨ', 'ͩ', 'ͪ', 'ͫ', 'ͬ', 'ͭ', 'ͮ', 'ͯ', '̾', '͛', '͆', '̚'
+        ];
+
+        const zalgoDown = [
+            '̖', '̗', '̘', '̙', '̜', '̝', '̞', '̟', '̠', '̤', '̥', '̦', '̩', '̪', '̫', '̬', '̭', '̮', '̯', '̰', '̱', '̲', '̳', '̹', '̺', '̻', '̼', 'ͅ', '͇', '͈', '͉', '͍', '͎', '͓', '͔', '͕', '͖', '͙', '͚', '̣'
+        ];
+
+        const zalgoMid = [
+            '̕', '̛', '̀', '́', '͘', '̡', '̢', '̧', '̨', '̴', '̵', '̶', '͜', '͝', '͞', '͟', '͠', '͢', '̸', '̷', '͡', '҉'
+        ];
+
+        function generateZalgo(text, intensity) {
+            let result = '';
+            const intensityMap = {
+                light: { min: 0, max: 2 },
+                medium: { min: 0, max: 4 },
+                heavy: { min: 1, max: 6 }
+            };
+
+            const range = intensityMap[intensity];
+
+            for (let i = 0; i < text.length; i++) {
+                result += text[i];
+
+                const numUp = Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+                const numMid = Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+                const numDown = Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+
+                for (let j = 0; j < numUp; j++) {
+                    result += zalgoUp[Math.floor(Math.random() * zalgoUp.length)];
+                }
+
+                for (let j = 0; j < numMid; j++) {
+                    result += zalgoMid[Math.floor(Math.random() * zalgoMid.length)];
+                }
+
+                for (let j = 0; j < numDown; j++) {
+                    result += zalgoDown[Math.floor(Math.random() * zalgoDown.length)];
+                }
+            }
+
+            return result;
+        }
+
+        function updateZalgoText() {
+            const inputText = document.getElementById('inputText').value;
+            const intensityRadios = document.querySelectorAll('input[name="intensity"]');
+            let intensity = 'light';
+
+            intensityRadios.forEach(radio => {
+                if (radio.checked) {
+                    intensity = radio.value;
+                }
+            });
+
+            const zalgoResult = generateZalgo(inputText, intensity);
+            document.getElementById('zalgoText').value = zalgoResult;
+        }
+
+        function copyToClipboard() {
+            const zalgoText = document.getElementById('zalgoText');
+            zalgoText.select();
+            document.execCommand('copy');
+            
+            const copyBtn = document.getElementById('copyBtn');
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = '已复制!';
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+            }, 2000);
+        }
+
+        // Dropdown functionality
+        function toggleDropdown() {
+            const dropdown = document.getElementById('tools-dropdown-menu');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('tools-dropdown');
+            const dropdownMenu = document.getElementById('tools-dropdown-menu');
+            
+            if (!dropdown.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        // Event listeners
+        document.getElementById('inputText').addEventListener('input', updateZalgoText);
+        document.querySelectorAll('input[name="intensity"]').forEach(radio => {
+            radio.addEventListener('change', updateZalgoText);
+        });
+    </script>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">&copy; 2024 Text Tools. All rights reserved.</p>
+                </div>
+                <div class="flex flex-wrap justify-center md:justify-end space-x-6">
+                    <a href="./aboutus.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">About Us</a>
+                    <a href="./contactus.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Contact Us</a>
+                    <a href="./terms-of-service.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Terms of Service</a>
+                    <a href="./privacypolicy.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

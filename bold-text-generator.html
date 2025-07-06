@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粗体文字生成器 - Bold Text Generator</title>
+    <meta name="description" content="生成多种粗体文字样式，包括数学粗体、Sans-serif粗体、斜体粗体等">
+    <link rel="shortcut icon" href="./favicon.png">
+    <script src="./tailwind.3.4.1.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+        }
+        label {
+            font-weight: bold;
+            text-align: left;
+            font-size: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            font-size: 20px;
+            text-align: left;
+        }
+        button {
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+        .bold-result {
+            font-size: 24px;
+            line-height: 1.5;
+        }
+        .style-category {
+            border-bottom: 1px solid #374151;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .style-category:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .category-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #cb6ce6;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .bulk-copy {
+            background-color: #374151;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .bulk-copy h3 {
+            color: #cb6ce6;
+            margin-bottom: 10px;
+        }
+        .bulk-copy textarea {
+            height: 200px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 font-sans">
+    <nav class="bg-black border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
+                    <li class="relative" id="tools-dropdown">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                            Tools
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <div id="tools-dropdown-menu" class="hidden absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                <li><a href="./zalgo-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Zalgo Text</a></li>
+                                <li><a href="./fancy-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Fancy Text</a></li>
+                                <li><a href="./strikethrough-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Strikethrough Text</a></li>
+                                <li><a href="./binary-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text ↔ Binary</a></li>
+                                <li><a href="./kaomoji-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kaomoji Generator</a></li>
+                                <li><a href="./ascii-art.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ASCII Art</a></li>
+                                <li><a href="./facebook-bold-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Facebook Bold Text</a></li>
+                                <li><a href="./bold-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bold Text Generator</a></li>
+                                <li><a href="./text-repeater.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text Repeater Online</a></li>
+                                <li><a href="./case-converter.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Case Converter Online</a></li>
+                                <li><a href="./unicode-text-cleaner.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Unicode Text Cleaner</a></li>
+                                <li><a href="./mocking-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mocking Text Generator</a></li>
+                                <li><a href="./emoji-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Emoji Text Generator</a></li>
+                                <li><a href="./upside-down-emoji.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Upside Down Emoji</a></li>
+                                <li><a href="./blank-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Blank Text Generator</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="./aboutus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">About</a></li>
+                    <li><a href="./contactus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Contact</a></li>
+                    <li><a href="./privacypolicy.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">粗体文字生成器</h1>
+            
+            <div class="bg-black p-5 rounded-3xl">
+                <div class="mb-6">
+                    <label for="inputText" class="text-gray-200 block mb-2">输入文本</label>
+                    <textarea 
+                        id="inputText" 
+                        placeholder="请输入你要转换为粗体的文本..."
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Mathematical Bold -->
+                    <div class="style-category">
+                        <h2 class="category-title">📐 数学粗体 (Mathematical Bold)</h2>
+                        <div class="space-y-4">
+                            <div class="text-left">
+                                <label class="text-gray-200 block mb-2">𝐌𝐚𝐭𝐡 𝐁𝐨𝐥𝐝</label>
+                                <div class="relative">
+                                    <textarea 
+                                        id="mathBold" 
+                                        class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg bold-result"
+                                        rows="2"
+                                        readonly
+                                    ></textarea>
+                                    <button 
+                                        class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                        onclick="copyToClipboard('mathBold')"
+                                    >
+                                        复制
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="text-left">
+                                <label class="text-gray-200 block mb-2">𝑴𝒂𝒕𝒉 𝑩𝒐𝒍𝒅 𝑰𝒕𝒂𝒍𝒊𝒄</label>
+                                <div class="relative">
+                                    <textarea 
+                                        id="mathBoldItalic" 
+                                        class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg bold-result"
+                                        rows="2"
+                                        readonly
+                                    ></textarea>
+                                    <button 
+                                        class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                        onclick="copyToClipboard('mathBoldItalic')"
+                                    >
+                                        复制
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sans-serif Bold -->
+                    <div class="style-category">
+                        <h2 class="category-title">🔤 Sans-serif 粗体</h2>
+                        <div class="space-y-4">
+                            <div class="text-left">
+                                <label class="text-gray-200 block mb-2">𝗦𝗮𝗻𝘀-𝘀𝗲𝗿𝗶𝗳 𝗕𝗼𝗹𝗱</label>
+                                <div class="relative">
+                                    <textarea 
+                                        id="sansSerifBold" 
+                                        class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg bold-result"
+                                        rows="2"
+                                        readonly
+                                    ></textarea>
+                                    <button 
+                                        class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                        onclick="copyToClipboard('sansSerifBold')"
+                                    >
+                                        复制
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="text-left">
+                                <label class="text-gray-200 block mb-2">𝘚𝘢𝘯𝘴-𝘴𝘦𝘳𝘪𝘧 𝘉𝘰𝘭𝘥 𝘐𝘵𝘢𝘭𝘪𝘤</label>
+                                <div class="relative">
+                                    <textarea 
+                                        id="sansSerifBoldItalic" 
+                                        class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg bold-result"
+                                        rows="2"
+                                        readonly
+                                    ></textarea>
+                                    <button 
+                                        class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                        onclick="copyToClipboard('sansSerifBoldItalic')"
+                                    >
+                                        复制
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monospace Bold -->
+                    <div class="style-category">
+                        <h2 class="category-title">💻 等宽粗体 (Monospace Bold)</h2>
+                        <div class="text-left">
+                            <label class="text-gray-200 block mb-2">𝙈𝙤𝙣𝙤𝙨𝙥𝙖𝙘𝙚 𝘽𝙤𝙡𝙙</label>
+                            <div class="relative">
+                                <textarea 
+                                    id="monospaceBold" 
+                                    class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg bold-result"
+                                    rows="2"
+                                    readonly
+                                ></textarea>
+                                <button 
+                                    class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                    onclick="copyToClipboard('monospaceBold')"
+                                >
+                                    复制
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Script Bold -->
+                    <div class="style-category">
+                        <h2 class="category-title">✨ 手写粗体 (Script Bold)</h2>
+                        <div class="text-left">
+                            <label class="text-gray-200 block mb-2">𝓢𝓬𝓻𝓲𝓹𝓽 𝓑𝓸𝓵𝓭</label>
+                            <div class="relative">
+                                <textarea 
+                                    id="scriptBold" 
+                                    class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg bold-result"
+                                    rows="2"
+                                    readonly
+                                ></textarea>
+                                <button 
+                                    class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                    onclick="copyToClipboard('scriptBold')"
+                                >
+                                    复制
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk Copy Section -->
+                <div class="bulk-copy">
+                    <h3>📋 批量复制所有样式</h3>
+                    <div class="relative">
+                        <textarea 
+                            id="bulkCopy" 
+                            class="bg-gray-800 border-none outline-none w-full p-3 text-sm text-white rounded-lg"
+                            readonly
+                        ></textarea>
+                        <button 
+                            class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-700 hover:bg-gray-600 rounded p-2 text-sm"
+                            onclick="copyToClipboard('bulkCopy')"
+                        >
+                            复制全部
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-gray-400 text-sm">
+                    <p>💡 提示：此工具提供多种粗体文字样式，适用于不同的社交媒体平台和文档。每种样式都有其独特的视觉效果和适用场景。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mathematical Bold
+        const mathBoldMap = {
+            'A': '𝐀', 'B': '𝐁', 'C': '𝐂', 'D': '𝐃', 'E': '𝐄', 'F': '𝐅', 'G': '𝐆', 'H': '𝐇', 'I': '𝐈', 'J': '𝐉', 'K': '𝐊', 'L': '𝐋', 'M': '𝐌', 'N': '𝐍', 'O': '𝐎', 'P': '𝐏', 'Q': '𝐐', 'R': '𝐑', 'S': '𝐒', 'T': '𝐓', 'U': '𝐔', 'V': '𝐕', 'W': '𝐖', 'X': '𝐗', 'Y': '𝐘', 'Z': '𝐙',
+            'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟', 'g': '𝐠', 'h': '𝐡', 'i': '𝐢', 'j': '𝐣', 'k': '𝐤', 'l': '𝐥', 'm': '𝐦', 'n': '𝐧', 'o': '𝐨', 'p': '𝐩', 'q': '𝐪', 'r': '𝐫', 's': '𝐬', 't': '𝐭', 'u': '𝐮', 'v': '𝐯', 'w': '𝐰', 'x': '𝐱', 'y': '𝐲', 'z': '𝐳'
+        };
+
+        // Mathematical Bold Italic
+        const mathBoldItalicMap = {
+            'A': '𝑨', 'B': '𝑩', 'C': '𝑪', 'D': '𝑫', 'E': '𝑬', 'F': '𝑭', 'G': '𝑮', 'H': '𝑯', 'I': '𝑰', 'J': '𝑱', 'K': '𝑲', 'L': '𝑳', 'M': '𝑴', 'N': '𝑵', 'O': '𝑶', 'P': '𝑷', 'Q': '𝑸', 'R': '𝑹', 'S': '𝑺', 'T': '𝑻', 'U': '𝑼', 'V': '𝑽', 'W': '𝑾', 'X': '𝑿', 'Y': '𝒀', 'Z': '𝒁',
+            'a': '𝒂', 'b': '𝒃', 'c': '𝒄', 'd': '𝒅', 'e': '𝒆', 'f': '𝒇', 'g': '𝒈', 'h': '𝒉', 'i': '𝒊', 'j': '𝒋', 'k': '𝒌', 'l': '𝒍', 'm': '𝒎', 'n': '𝒏', 'o': '𝒐', 'p': '𝒑', 'q': '𝒒', 'r': '𝒓', 's': '𝒔', 't': '𝒕', 'u': '𝒖', 'v': '𝒗', 'w': '𝒘', 'x': '𝒙', 'y': '𝒚', 'z': '𝒛'
+        };
+
+        // Sans-serif Bold
+        const sansSerifBoldMap = {
+            'A': '𝗔', 'B': '𝗕', 'C': '𝗖', 'D': '𝗗', 'E': '𝗘', 'F': '𝗙', 'G': '𝗚', 'H': '𝗛', 'I': '𝗜', 'J': '𝗝', 'K': '𝗞', 'L': '𝗟', 'M': '𝗠', 'N': '𝗡', 'O': '𝗢', 'P': '𝗣', 'Q': '𝗤', 'R': '𝗥', 'S': '𝗦', 'T': '𝗧', 'U': '𝗨', 'V': '𝗩', 'W': '𝗪', 'X': '𝗫', 'Y': '𝗬', 'Z': '𝗭',
+            'a': '𝗮', 'b': '𝗯', 'c': '𝗰', 'd': '𝗱', 'e': '𝗲', 'f': '𝗳', 'g': '𝗴', 'h': '𝗵', 'i': '𝗶', 'j': '𝗷', 'k': '𝗸', 'l': '𝗹', 'm': '𝗺', 'n': '𝗻', 'o': '𝗼', 'p': '𝗽', 'q': '𝗾', 'r': '𝗿', 's': '𝘀', 't': '𝘁', 'u': '𝘂', 'v': '𝘃', 'w': '𝘄', 'x': '𝘅', 'y': '𝘆', 'z': '𝘇'
+        };
+
+        // Sans-serif Bold Italic
+        const sansSerifBoldItalicMap = {
+            'A': '𝘼', 'B': '𝘽', 'C': '𝘾', 'D': '𝘿', 'E': '𝙀', 'F': '𝙁', 'G': '𝙂', 'H': '𝙃', 'I': '𝙄', 'J': '𝙅', 'K': '𝙆', 'L': '𝙇', 'M': '𝙈', 'N': '𝙉', 'O': '𝙊', 'P': '𝙋', 'Q': '𝙌', 'R': '𝙍', 'S': '𝙎', 'T': '𝙏', 'U': '𝙐', 'V': '𝙑', 'W': '𝙒', 'X': '𝙓', 'Y': '𝙔', 'Z': '𝙕',
+            'a': '𝙖', 'b': '𝙗', 'c': '𝙘', 'd': '𝙙', 'e': '𝙚', 'f': '𝙛', 'g': '𝙜', 'h': '𝙝', 'i': '𝙞', 'j': '𝙟', 'k': '𝙠', 'l': '𝙡', 'm': '𝙢', 'n': '𝙣', 'o': '𝙤', 'p': '𝙥', 'q': '𝙦', 'r': '𝙧', 's': '𝙨', 't': '𝙩', 'u': '𝙪', 'v': '𝙫', 'w': '𝙬', 'x': '𝙭', 'y': '𝙮', 'z': '𝙯'
+        };
+
+        // Monospace Bold
+        const monospaceBoldMap = {
+            'A': '𝙰', 'B': '𝙱', 'C': '𝙲', 'D': '𝙳', 'E': '𝙴', 'F': '𝙵', 'G': '𝙶', 'H': '𝙷', 'I': '𝙸', 'J': '𝙹', 'K': '𝙺', 'L': '𝙻', 'M': '𝙼', 'N': '𝙽', 'O': '𝙾', 'P': '𝙿', 'Q': '𝚀', 'R': '𝚁', 'S': '𝚂', 'T': '𝚃', 'U': '𝚄', 'V': '𝚅', 'W': '𝚆', 'X': '𝚇', 'Y': '𝚈', 'Z': '𝚉',
+            'a': '𝚊', 'b': '𝚋', 'c': '𝚌', 'd': '𝚍', 'e': '𝚎', 'f': '𝚏', 'g': '𝚐', 'h': '𝚑', 'i': '𝚒', 'j': '𝚓', 'k': '𝚔', 'l': '𝚕', 'm': '𝚖', 'n': '𝚗', 'o': '𝚘', 'p': '𝚙', 'q': '𝚚', 'r': '𝚛', 's': '𝚜', 't': '𝚝', 'u': '𝚞', 'v': '𝚟', 'w': '𝚠', 'x': '𝚡', 'y': '𝚢', 'z': '𝚣'
+        };
+
+        // Script Bold
+        const scriptBoldMap = {
+            'A': '𝓐', 'B': '𝓑', 'C': '𝓒', 'D': '𝓓', 'E': '𝓔', 'F': '𝓕', 'G': '𝓖', 'H': '𝓗', 'I': '𝓘', 'J': '𝓙', 'K': '𝓚', 'L': '𝓛', 'M': '𝓜', 'N': '𝓝', 'O': '𝓞', 'P': '𝓟', 'Q': '𝓠', 'R': '𝓡', 'S': '𝓢', 'T': '𝓣', 'U': '𝓤', 'V': '𝓥', 'W': '𝓦', 'X': '𝓧', 'Y': '𝓨', 'Z': '𝓩',
+            'a': '𝓪', 'b': '𝓫', 'c': '𝓬', 'd': '𝓭', 'e': '𝓮', 'f': '𝓯', 'g': '𝓰', 'h': '𝓱', 'i': '𝓲', 'j': '𝓳', 'k': '𝓴', 'l': '𝓵', 'm': '𝓶', 'n': '𝓷', 'o': '𝓸', 'p': '𝓹', 'q': '𝓺', 'r': '𝓻', 's': '𝓼', 't': '𝓽', 'u': '𝓾', 'v': '𝓿', 'w': '𝔀', 'x': '𝔁', 'y': '𝔂', 'z': '𝔃'
+        };
+
+        function convertText(text, charMap) {
+            return text.split('').map(char => charMap[char] || char).join('');
+        }
+
+        function updateAllBoldStyles() {
+            const inputText = document.getElementById('inputText').value;
+            
+            const mathBoldText = convertText(inputText, mathBoldMap);
+            const mathBoldItalicText = convertText(inputText, mathBoldItalicMap);
+            const sansSerifBoldText = convertText(inputText, sansSerifBoldMap);
+            const sansSerifBoldItalicText = convertText(inputText, sansSerifBoldItalicMap);
+            const monospaceBoldText = convertText(inputText, monospaceBoldMap);
+            const scriptBoldText = convertText(inputText, scriptBoldMap);
+            
+            document.getElementById('mathBold').value = mathBoldText;
+            document.getElementById('mathBoldItalic').value = mathBoldItalicText;
+            document.getElementById('sansSerifBold').value = sansSerifBoldText;
+            document.getElementById('sansSerifBoldItalic').value = sansSerifBoldItalicText;
+            document.getElementById('monospaceBold').value = monospaceBoldText;
+            document.getElementById('scriptBold').value = scriptBoldText;
+            
+            // Update bulk copy
+            const bulkText = [
+                'Math Bold: ' + mathBoldText,
+                'Math Bold Italic: ' + mathBoldItalicText,
+                'Sans-serif Bold: ' + sansSerifBoldText,
+                'Sans-serif Bold Italic: ' + sansSerifBoldItalicText,
+                'Monospace Bold: ' + monospaceBoldText,
+                'Script Bold: ' + scriptBoldText
+            ].join('\n\n');
+            
+            document.getElementById('bulkCopy').value = bulkText;
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            document.execCommand('copy');
+            
+            // Show feedback
+            const button = element.parentElement.querySelector('button');
+            const originalText = button.textContent;
+            button.textContent = '已复制!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+
+        // Dropdown functionality
+        function toggleDropdown() {
+            const dropdown = document.getElementById('tools-dropdown-menu');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('tools-dropdown');
+            const dropdownMenu = document.getElementById('tools-dropdown-menu');
+            
+            if (!dropdown.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        // Event listeners
+        document.getElementById('inputText').addEventListener('input', updateAllBoldStyles);
+    </script>
+</body>
+</html> 

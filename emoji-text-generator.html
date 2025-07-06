@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Text Generator - Add Emojis to Text</title>
+    <meta name="description" content="Generate text with emojis between letters or words. Perfect for social media posts and creative text formatting.">
+    <link rel="shortcut icon" href="./favicon.png">
+    <script src="./tailwind.3.4.1.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+        }
+        .emoji-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .emoji-category {
+            background-color: #374151;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        .emoji-category:hover {
+            background-color: #4b5563;
+            transform: scale(1.05);
+        }
+        .emoji-category.active {
+            border-color: #cb6ce6;
+            background-color: #4b5563;
+        }
+        .emoji-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            gap: 8px;
+            margin: 15px 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .emoji-item {
+            background-color: #374151;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-size: 20px;
+            border: 2px solid transparent;
+        }
+        .emoji-item:hover {
+            background-color: #4b5563;
+            transform: scale(1.1);
+        }
+        .emoji-item.selected {
+            border-color: #cb6ce6;
+            background-color: #4b5563;
+        }
+        .insertion-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .insertion-option {
+            background-color: #374151;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        .insertion-option:hover {
+            background-color: #4b5563;
+            transform: scale(1.02);
+        }
+        .insertion-option.active {
+            border-color: #cb6ce6;
+            background-color: #4b5563;
+        }
+        .insertion-option h3 {
+            color: #cb6ce6;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .insertion-option .example {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        .emoji-preview {
+            background-color: #374151;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .preview-text {
+            font-size: 20px;
+            line-height: 1.5;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 font-sans">
+    <nav class="bg-black border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
+                    <li class="relative" id="tools-dropdown">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                            Tools
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <div id="tools-dropdown-menu" class="hidden absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                <li><a href="./zalgo-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Zalgo Text</a></li>
+                                <li><a href="./fancy-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Fancy Text</a></li>
+                                <li><a href="./strikethrough-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Strikethrough Text</a></li>
+                                <li><a href="./binary-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text ↔ Binary</a></li>
+                                <li><a href="./kaomoji-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kaomoji Generator</a></li>
+                                <li><a href="./ascii-art.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ASCII Art</a></li>
+                                <li><a href="./facebook-bold-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Facebook Bold Text</a></li>
+                                <li><a href="./bold-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bold Text Generator</a></li>
+                                <li><a href="./text-repeater.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text Repeater Online</a></li>
+                                <li><a href="./case-converter.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Case Converter Online</a></li>
+                                <li><a href="./unicode-text-cleaner.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Unicode Text Cleaner</a></li>
+                                <li><a href="./mocking-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mocking Text Generator</a></li>
+                                <li><a href="./emoji-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Emoji Text Generator</a></li>
+                                <li><a href="./upside-down-emoji.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Upside Down Emoji</a></li>
+                                <li><a href="./blank-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Blank Text Generator</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">Emoji Text Generator</h1>
+            
+            <div class="bg-black p-5 rounded-3xl">
+                <div class="mb-6">
+                    <label for="inputText" class="text-gray-200 block mb-2 text-left">Enter Your Text</label>
+                    <textarea 
+                        id="inputText" 
+                        placeholder="Type your message here..."
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-gray-200 block mb-2 text-left">Choose Emoji Category</label>
+                    <div class="emoji-categories">
+                        <div class="emoji-category active" onclick="showEmojiCategory('smileys')" data-category="smileys">
+                            😊 Smileys
+                        </div>
+                        <div class="emoji-category" onclick="showEmojiCategory('hearts')" data-category="hearts">
+                            ❤️ Hearts
+                        </div>
+                        <div class="emoji-category" onclick="showEmojiCategory('nature')" data-category="nature">
+                            🌸 Nature
+                        </div>
+                        <div class="emoji-category" onclick="showEmojiCategory('objects')" data-category="objects">
+                            ⭐ Objects
+                        </div>
+                        <div class="emoji-category" onclick="showEmojiCategory('symbols')" data-category="symbols">
+                            ✨ Symbols
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-gray-200 block mb-2 text-left">Select Emoji</label>
+                    <div class="emoji-grid" id="emojiGrid">
+                        <!-- Emojis will be populated here -->
+                    </div>
+                </div>
+
+                <div class="insertion-options">
+                    <div class="insertion-option active" onclick="setInsertionMode('between-letters')" data-mode="between-letters">
+                        <h3>Between Letters</h3>
+                        <div class="example">H😊e😊l😊l😊o</div>
+                    </div>
+                    <div class="insertion-option" onclick="setInsertionMode('between-words')" data-mode="between-words">
+                        <h3>Between Words</h3>
+                        <div class="example">Hello 😊 World</div>
+                    </div>
+                    <div class="insertion-option" onclick="setInsertionMode('start-end')" data-mode="start-end">
+                        <h3>Start & End</h3>
+                        <div class="example">😊 Hello World 😊</div>
+                    </div>
+                    <div class="insertion-option" onclick="setInsertionMode('random')" data-mode="random">
+                        <h3>Random Places</h3>
+                        <div class="example">H😊ello Wo😊rld</div>
+                    </div>
+                </div>
+
+                <div class="emoji-preview">
+                    <div class="preview-text" id="emojiPreview">
+                        Y😊o😊u😊r😊 😊t😊e😊x😊t😊 😊w😊i😊l😊l😊 😊a😊p😊p😊e😊a😊r😊 😊h😊e😊r😊e...
+                    </div>
+                    <button 
+                        onclick="generateEmojiText()"
+                        class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mr-2 transition-colors"
+                    >
+                        Generate
+                    </button>
+                    <button 
+                        onclick="copyEmojiText()"
+                        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors"
+                    >
+                        Copy
+                    </button>
+                </div>
+
+                <div class="mb-6">
+                    <label for="outputText" class="text-gray-200 block mb-2 text-left">Emoji Text Output</label>
+                    <div class="relative">
+                        <textarea 
+                            id="outputText" 
+                            class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg"
+                            rows="4"
+                            readonly
+                            placeholder="Your emoji text will appear here..."
+                        ></textarea>
+                        <button 
+                            class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                            onclick="copyToClipboard()"
+                        >
+                            Copy
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-gray-400 text-sm">
+                    <p>💡 Tips: Create eye-catching social media posts by adding emojis between letters or words. Perfect for Instagram, Twitter, and Discord!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">&copy; 2024 Text Tools. All rights reserved.</p>
+                </div>
+                <div class="flex flex-wrap justify-center md:justify-end space-x-6">
+                    <a href="./aboutus.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">About Us</a>
+                    <a href="./contactus.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Contact Us</a>
+                    <a href="./terms-of-service.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Terms of Service</a>
+                    <a href="./privacypolicy.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const emojiCategories = {
+            smileys: ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '😚'],
+            hearts: ['❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '🤍', '🤎', '💔', '❣️', '💕', '💞', '💓', '💗', '💖', '💘', '💝', '💟', '♥️'],
+            nature: ['🌸', '🌺', '🌻', '🌷', '🌹', '🥀', '🌱', '🌿', '🍀', '🌾', '🌵', '🌲', '🌳', '🌴', '🌊', '⭐', '🌟', '✨', '☀️', '🌙'],
+            objects: ['⭐', '🎉', '🎊', '🎈', '🎁', '🎀', '🔥', '💎', '👑', '🏆', '🎯', '🎪', '🎭', '🎨', '🎵', '🎶', '🎤', '🎧', '🎮', '🕹️'],
+            symbols: ['✨', '💫', '⚡', '💥', '💢', '💯', '🔞', '📍', '🆕', '🆓', '🔥', '💎', '⚠️', '🚫', '✅', '❌', '🔔', '💰', '🏃', '💨']
+        };
+
+        let selectedEmoji = '😊';
+        let insertionMode = 'between-letters';
+
+        function showEmojiCategory(category) {
+            // Update UI
+            document.querySelectorAll('.emoji-category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Populate emoji grid
+            const emojiGrid = document.getElementById('emojiGrid');
+            emojiGrid.innerHTML = '';
+            
+            emojiCategories[category].forEach(emoji => {
+                const emojiItem = document.createElement('div');
+                emojiItem.className = 'emoji-item';
+                emojiItem.textContent = emoji;
+                emojiItem.onclick = () => selectEmoji(emoji, emojiItem);
+                
+                if (emoji === selectedEmoji) {
+                    emojiItem.classList.add('selected');
+                }
+                
+                emojiGrid.appendChild(emojiItem);
+            });
+        }
+
+        function selectEmoji(emoji, element) {
+            selectedEmoji = emoji;
+            
+            // Update UI
+            document.querySelectorAll('.emoji-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            generateEmojiText();
+        }
+
+        function setInsertionMode(mode) {
+            insertionMode = mode;
+            
+            // Update UI
+            document.querySelectorAll('.insertion-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            generateEmojiText();
+        }
+
+        function generateEmojiText() {
+            const inputText = document.getElementById('inputText').value;
+            const outputTextarea = document.getElementById('outputText');
+            const emojiPreview = document.getElementById('emojiPreview');
+            
+            if (!inputText.trim()) {
+                outputTextarea.value = '';
+                emojiPreview.textContent = 'Y😊o😊u😊r😊 😊t😊e😊x😊t😊 😊w😊i😊l😊l😊 😊a😊p😊p😊e😊a😊r😊 😊h😊e😊r😊e...';
+                return;
+            }
+            
+            let emojiText = '';
+            
+            switch(insertionMode) {
+                case 'between-letters':
+                    emojiText = inputText.replace(/(.)/g, '$1' + selectedEmoji).slice(0, -selectedEmoji.length);
+                    break;
+                    
+                case 'between-words':
+                    emojiText = inputText.split(' ').join(' ' + selectedEmoji + ' ');
+                    break;
+                    
+                case 'start-end':
+                    emojiText = selectedEmoji + ' ' + inputText + ' ' + selectedEmoji;
+                    break;
+                    
+                case 'random':
+                    const chars = inputText.split('');
+                    const numInsertions = Math.max(1, Math.floor(chars.length / 3));
+                    for (let i = 0; i < numInsertions; i++) {
+                        const randomIndex = Math.floor(Math.random() * chars.length);
+                        chars.splice(randomIndex, 0, selectedEmoji);
+                    }
+                    emojiText = chars.join('');
+                    break;
+                    
+                default:
+                    emojiText = inputText;
+            }
+            
+            outputTextarea.value = emojiText;
+            emojiPreview.textContent = emojiText;
+        }
+
+        function copyEmojiText() {
+            const emojiText = document.getElementById('emojiPreview').textContent;
+            navigator.clipboard.writeText(emojiText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById('outputText');
+            outputText.select();
+            document.execCommand('copy');
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('tools-dropdown-menu');
+            dropdown.classList.toggle('hidden');
+        }
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('tools-dropdown');
+            const dropdownMenu = document.getElementById('tools-dropdown-menu');
+            
+            if (!dropdown.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('inputText').addEventListener('input', generateEmojiText);
+        
+        // Initialize
+        showEmojiCategory('smileys');
+        document.getElementById('inputText').value = "Hello World";
+        generateEmojiText();
+    </script>
+</body>
+</html> 

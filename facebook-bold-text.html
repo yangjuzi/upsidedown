@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook 粗体文字生成器</title>
+    <link rel="shortcut icon" href="./favicon.png">
+    <script src="./tailwind.3.4.1.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: black; }
+        .bold-result { font-size: 24px; line-height: 1.5; }
+        .facebook-preview { background-color: #242526; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 3px solid #1877f2; }
+        .facebook-preview h3 { color: #1877f2; margin-bottom: 10px; font-size: 16px; }
+        .facebook-preview .preview-text { color: #e4e6ea; font-size: 18px; line-height: 1.4; }
+        .quick-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 20px; }
+        .example-item { background-color: #374151; padding: 10px; border-radius: 8px; cursor: pointer; transition: all 0.2s; text-align: center; }
+        .example-item:hover { background-color: #4b5563; transform: scale(1.02); }
+        .example-text { font-size: 20px; margin-bottom: 5px; }
+        .example-label { font-size: 12px; color: #9ca3af; }
+    </style>
+</head>
+<body class="bg-black text-gray-200 font-sans">
+    <nav class="bg-black border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
+                    <li class="relative" id="tools-dropdown">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                            Tools
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <div id="tools-dropdown-menu" class="hidden absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                <li><a href="./zalgo-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Zalgo Text</a></li>
+                                <li><a href="./fancy-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Fancy Text</a></li>
+                                <li><a href="./strikethrough-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Strikethrough Text</a></li>
+                                <li><a href="./binary-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text ↔ Binary</a></li>
+                                <li><a href="./kaomoji-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kaomoji Generator</a></li>
+                                <li><a href="./ascii-art.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ASCII Art</a></li>
+                                <li><a href="./facebook-bold-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Facebook Bold Text</a></li>
+                                <li><a href="./bold-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bold Text Generator</a></li>
+                                <li><a href="./text-repeater.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text Repeater Online</a></li>
+                                <li><a href="./case-converter.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Case Converter Online</a></li>
+                                <li><a href="./unicode-text-cleaner.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Unicode Text Cleaner</a></li>
+                                <li><a href="./mocking-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mocking Text Generator</a></li>
+                                <li><a href="./emoji-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Emoji Text Generator</a></li>
+                                <li><a href="./upside-down-emoji.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Upside Down Emoji</a></li>
+                                <li><a href="./blank-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Blank Text Generator</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="./aboutus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">About</a></li>
+                    <li><a href="./contactus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Contact</a></li>
+                    <li><a href="./privacypolicy.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">Facebook 粗体文字生成器</h1>
+            
+            <div class="bg-black p-5 rounded-3xl">
+                <div class="mb-6">
+                    <label for="inputText" class="text-gray-200 block mb-2">输入文本</label>
+                    <textarea 
+                        id="inputText" 
+                        placeholder="请输入你要转换为粗体的文本..."
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="text-left">
+                        <label class="text-gray-200 block mb-2">𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸 𝗽𝗿𝗲𝗳𝗲𝗿𝗿𝗲𝗱 𝗯𝗼𝗹𝗱</label>
+                        <div class="relative">
+                            <textarea 
+                                id="facebookBold" 
+                                class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg bold-result"
+                                rows="3"
+                                readonly
+                            ></textarea>
+                            <button 
+                                class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                onclick="copyToClipboard('facebookBold')"
+                            >
+                                复制
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-left">
+                        <label class="text-gray-200 block mb-2">𝙈𝙖𝙩 𝘽𝙤𝙡𝙙</label>
+                        <div class="relative">
+                            <textarea 
+                                id="mathBold" 
+                                class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg bold-result"
+                                rows="3"
+                                readonly
+                            ></textarea>
+                            <button 
+                                class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                onclick="copyToClipboard('mathBold')"
+                            >
+                                复制
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facebook-preview">
+                    <h3>📘 Facebook 预览效果</h3>
+                    <div class="preview-text" id="facebookPreview">
+                        在这里可以预览你的粗体文字在Facebook上的显示效果
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <h3 class="text-lg font-bold mb-4 text-purple-400">🚀 快速示例 (点击使用)</h3>
+                    <div class="quick-examples">
+                        <div class="example-item" onclick="useExample('𝗛𝗲𝗹𝗹𝗼 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸!')">
+                            <div class="example-text">𝗛𝗲𝗹𝗹𝗼 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸!</div>
+                            <div class="example-label">问候语</div>
+                        </div>
+                        <div class="example-item" onclick="useExample('🔥 𝗛𝗼𝘁 𝗗𝗲𝗮𝗹 🔥')">
+                            <div class="example-text">🔥 𝗛𝗼𝘁 𝗗𝗲𝗮𝗹 🔥</div>
+                            <div class="example-label">促销活动</div>
+                        </div>
+                        <div class="example-item" onclick="useExample('💡 𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁')">
+                            <div class="example-text">💡 𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁</div>
+                            <div class="example-label">重要通知</div>
+                        </div>
+                        <div class="example-item" onclick="useExample('🎉 𝗖𝗼𝗻𝗴𝗿𝗮𝘁𝘂𝗹𝗮𝘁𝗶𝗼𝗻𝘀! 🎉')">
+                            <div class="example-text">🎉 𝗖𝗼𝗻𝗴𝗿𝗮𝘁𝘂𝗹𝗮𝘁𝗶𝗼𝗻𝘀! 🎉</div>
+                            <div class="example-label">庆祝祝贺</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-gray-400 text-sm">
+                    <p>💡 提示：这些粗体文字特别适用于Facebook帖子、评论和状态更新。它们在Facebook的深色和浅色主题下都有良好的显示效果。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const facebookBoldMap = {
+            'A': '𝗔', 'B': '𝗕', 'C': '𝗖', 'D': '𝗗', 'E': '𝗘', 'F': '𝗙', 'G': '𝗚', 'H': '𝗛', 'I': '𝗜', 'J': '𝗝', 'K': '𝗞', 'L': '𝗟', 'M': '𝗠', 'N': '𝗡', 'O': '𝗢', 'P': '𝗣', 'Q': '𝗤', 'R': '𝗥', 'S': '𝗦', 'T': '𝗧', 'U': '𝗨', 'V': '𝗩', 'W': '𝗪', 'X': '𝗫', 'Y': '𝗬', 'Z': '𝗭',
+            'a': '𝗮', 'b': '𝗯', 'c': '𝗰', 'd': '𝗱', 'e': '𝗲', 'f': '𝗳', 'g': '𝗴', 'h': '𝗵', 'i': '𝗶', 'j': '𝗷', 'k': '𝗸', 'l': '𝗹', 'm': '𝗺', 'n': '𝗻', 'o': '𝗼', 'p': '𝗽', 'q': '𝗾', 'r': '𝗿', 's': '𝘀', 't': '𝘁', 'u': '𝘂', 'v': '𝘃', 'w': '𝘄', 'x': '𝘅', 'y': '𝘆', 'z': '𝘇',
+            '0': '𝟬', '1': '𝟭', '2': '𝟮', '3': '𝟯', '4': '𝟰', '5': '𝟱', '6': '𝟲', '7': '𝟳', '8': '𝟴', '9': '𝟵'
+        };
+
+        const mathBoldMap = {
+            'A': '𝐀', 'B': '𝐁', 'C': '𝐂', 'D': '𝐃', 'E': '𝐄', 'F': '𝐅', 'G': '𝐆', 'H': '𝐇', 'I': '𝐈', 'J': '𝐉', 'K': '𝐊', 'L': '𝐋', 'M': '𝐌', 'N': '𝐍', 'O': '𝐎', 'P': '𝐏', 'Q': '𝐐', 'R': '𝐑', 'S': '𝐒', 'T': '𝐓', 'U': '𝐔', 'V': '𝐕', 'W': '𝐖', 'X': '𝐗', 'Y': '𝐘', 'Z': '𝐙',
+            'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟', 'g': '𝐠', 'h': '𝐡', 'i': '𝐢', 'j': '𝐣', 'k': '𝐤', 'l': '𝐥', 'm': '𝐦', 'n': '𝐧', 'o': '𝐨', 'p': '𝐩', 'q': '𝐪', 'r': '𝐫', 's': '𝐬', 't': '𝐭', 'u': '𝐮', 'v': '𝐯', 'w': '𝐰', 'x': '𝐱', 'y': '𝐲', 'z': '𝐳'
+        };
+
+        function convertText(text, charMap) {
+            return text.split('').map(char => charMap[char] || char).join('');
+        }
+
+        function updateAllBoldStyles() {
+            const inputText = document.getElementById('inputText').value;
+            
+            const facebookBoldText = convertText(inputText, facebookBoldMap);
+            const mathBoldText = convertText(inputText, mathBoldMap);
+            
+            document.getElementById('facebookBold').value = facebookBoldText;
+            document.getElementById('mathBold').value = mathBoldText;
+            
+            document.getElementById('facebookPreview').textContent = facebookBoldText || '在这里可以预览你的粗体文字在Facebook上的显示效果';
+        }
+
+        function useExample(exampleText) {
+            document.getElementById('inputText').value = exampleText;
+            updateAllBoldStyles();
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            document.execCommand('copy');
+            
+            const button = element.parentElement.querySelector('button');
+            const originalText = button.textContent;
+            button.textContent = '已复制!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('tools-dropdown-menu');
+            dropdown.classList.toggle('hidden');
+        }
+
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('tools-dropdown');
+            const dropdownMenu = document.getElementById('tools-dropdown-menu');
+            
+            if (!dropdown.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('inputText').addEventListener('input', updateAllBoldStyles);
+    </script>
+</body>
+</html> 

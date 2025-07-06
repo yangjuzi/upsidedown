@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二进制文本转换器 - Binary Text Converter</title>
+    <meta name="description" content="文本与二进制相互转换工具，支持双向转换">
+    <link rel="shortcut icon" href="./favicon.png">
+    <script src="./tailwind.3.4.1.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+        }
+        label {
+            font-weight: bold;
+            text-align: left;
+            font-size: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            font-size: 20px;
+            text-align: left;
+        }
+        button {
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+        .binary-result {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.5;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 font-sans">
+    <nav class="bg-black border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
+                    <li class="relative" id="tools-dropdown">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                            Tools
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <div id="tools-dropdown-menu" class="hidden absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                <li><a href="./zalgo-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Zalgo Text</a></li>
+                                <li><a href="./fancy-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Fancy Text</a></li>
+                                <li><a href="./strikethrough-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Strikethrough Text</a></li>
+                                <li><a href="./binary-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text ↔ Binary</a></li>
+                                <li><a href="./kaomoji-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kaomoji Generator</a></li>
+                                <li><a href="./ascii-art.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ASCII Art</a></li>
+                                <li><a href="./facebook-bold-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Facebook Bold Text</a></li>
+                                <li><a href="./bold-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bold Text Generator</a></li>
+                                <li><a href="./text-repeater.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text Repeater Online</a></li>
+                                <li><a href="./case-converter.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Case Converter Online</a></li>
+                                <li><a href="./unicode-text-cleaner.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Unicode Text Cleaner</a></li>
+                                <li><a href="./mocking-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mocking Text Generator</a></li>
+                                <li><a href="./emoji-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Emoji Text Generator</a></li>
+                                <li><a href="./upside-down-emoji.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Upside Down Emoji</a></li>
+                                <li><a href="./blank-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Blank Text Generator</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="./aboutus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">About</a></li>
+                    <li><a href="./contactus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Contact</a></li>
+                    <li><a href="./privacypolicy.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">二进制文本转换器</h1>
+            
+            <div class="bg-black p-5 rounded-3xl">
+                <div class="mb-8">
+                    <h2 class="text-xl text-gray-200 mb-4">文本转二进制</h2>
+                    <div class="mb-4">
+                        <label for="textInput" class="text-gray-200 block mb-2">输入文本</label>
+                        <textarea 
+                            id="textInput" 
+                            placeholder="请输入要转换为二进制的文本..."
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            rows="3"
+                        ></textarea>
+                    </div>
+                    <div class="text-left">
+                        <label class="text-gray-200 block mb-2">二进制结果</label>
+                        <div class="relative">
+                            <textarea 
+                                id="binaryOutput" 
+                                class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg binary-result"
+                                rows="5"
+                                readonly
+                            ></textarea>
+                            <button 
+                                class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                onclick="copyToClipboard('binaryOutput')"
+                            >
+                                复制
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-700 pt-8">
+                    <h2 class="text-xl text-gray-200 mb-4">二进制转文本</h2>
+                    <div class="mb-4">
+                        <label for="binaryInput" class="text-gray-200 block mb-2">输入二进制</label>
+                        <textarea 
+                            id="binaryInput" 
+                            placeholder="请输入二进制代码（如：01001000 01100101 01101100 01101100 01101111）..."
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 binary-result"
+                            rows="4"
+                        ></textarea>
+                    </div>
+                    <div class="text-left">
+                        <label class="text-gray-200 block mb-2">文本结果</label>
+                        <div class="relative">
+                            <textarea 
+                                id="textOutput" 
+                                class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg"
+                                rows="3"
+                                readonly
+                            ></textarea>
+                            <button 
+                                class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                onclick="copyToClipboard('textOutput')"
+                            >
+                                复制
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 space-y-2">
+                    <div class="flex justify-center space-x-4">
+                        <button 
+                            onclick="clearAll()" 
+                            class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+                        >
+                            清空所有
+                        </button>
+                        <button 
+                            onclick="swapContent()" 
+                            class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+                        >
+                            交换内容
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-gray-400 text-sm">
+                    <p>💡 提示：此工具将文本转换为二进制（每个字符转换为8位二进制），支持双向转换。二进制数字之间用空格分隔。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function textToBinary(text) {
+            return text.split('').map(char => {
+                return char.charCodeAt(0).toString(2).padStart(8, '0');
+            }).join(' ');
+        }
+
+        function binaryToText(binary) {
+            try {
+                // Remove extra spaces and split by space
+                const binaryArray = binary.replace(/\s+/g, ' ').trim().split(' ');
+                
+                // Filter out empty strings and validate binary
+                const validBinary = binaryArray.filter(bin => {
+                    return bin && /^[01]{1,8}$/.test(bin);
+                });
+
+                if (validBinary.length === 0) {
+                    return '';
+                }
+
+                return validBinary.map(bin => {
+                    const decimal = parseInt(bin, 2);
+                    return String.fromCharCode(decimal);
+                }).join('');
+            } catch (error) {
+                return '错误：无效的二进制格式';
+            }
+        }
+
+        function updateBinaryOutput() {
+            const text = document.getElementById('textInput').value;
+            const binary = textToBinary(text);
+            document.getElementById('binaryOutput').value = binary;
+        }
+
+        function updateTextOutput() {
+            const binary = document.getElementById('binaryInput').value;
+            const text = binaryToText(binary);
+            document.getElementById('textOutput').value = text;
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            document.execCommand('copy');
+            
+            // Show feedback
+            const button = element.parentElement.querySelector('button');
+            const originalText = button.textContent;
+            button.textContent = '已复制!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+
+        function clearAll() {
+            document.getElementById('textInput').value = '';
+            document.getElementById('binaryInput').value = '';
+            document.getElementById('binaryOutput').value = '';
+            document.getElementById('textOutput').value = '';
+        }
+
+        function swapContent() {
+            const textInput = document.getElementById('textInput');
+            const binaryInput = document.getElementById('binaryInput');
+            const textOutput = document.getElementById('textOutput');
+            const binaryOutput = document.getElementById('binaryOutput');
+            
+            // Swap text input with binary output
+            const tempText = textInput.value;
+            textInput.value = textOutput.value;
+            
+            // Swap binary input with text output
+            const tempBinary = binaryInput.value;
+            binaryInput.value = binaryOutput.value;
+            
+            // Update outputs
+            updateBinaryOutput();
+            updateTextOutput();
+        }
+
+        // Dropdown functionality
+        function toggleDropdown() {
+            const dropdown = document.getElementById('tools-dropdown-menu');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('tools-dropdown');
+            const dropdownMenu = document.getElementById('tools-dropdown-menu');
+            
+            if (!dropdown.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        // Event listeners
+        document.getElementById('textInput').addEventListener('input', updateBinaryOutput);
+        document.getElementById('binaryInput').addEventListener('input', updateTextOutput);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII艺术字生成器 - ASCII Art Generator</title>
+    <meta name="description" content="生成各种ASCII艺术字效果，创建独特的文字艺术">
+    <link rel="shortcut icon" href="./favicon.png">
+    <script src="./tailwind.3.4.1.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+        }
+        label {
+            font-weight: bold;
+            text-align: left;
+            font-size: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            font-size: 20px;
+            text-align: left;
+        }
+        button {
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+        .ascii-result {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.2;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .style-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .style-option {
+            background-color: #374151;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .style-option:hover {
+            background-color: #4b5563;
+        }
+        .style-option.selected {
+            background-color: #7c3aed;
+        }
+        .style-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .style-preview {
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            line-height: 1.1;
+            white-space: pre;
+            color: #d1d5db;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 font-sans">
+    <nav class="bg-black border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
+                    <li class="relative" id="tools-dropdown">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                            Tools
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+                        <div id="tools-dropdown-menu" class="hidden absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                <li><a href="./zalgo-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Zalgo Text</a></li>
+                                <li><a href="./fancy-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Fancy Text</a></li>
+                                <li><a href="./strikethrough-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Strikethrough Text</a></li>
+                                <li><a href="./binary-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text ↔ Binary</a></li>
+                                <li><a href="./kaomoji-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kaomoji Generator</a></li>
+                                <li><a href="./ascii-art.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ASCII Art</a></li>
+                                <li><a href="./facebook-bold-text.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Facebook Bold Text</a></li>
+                                <li><a href="./bold-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Bold Text Generator</a></li>
+                                <li><a href="./text-repeater.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Text Repeater Online</a></li>
+                                <li><a href="./case-converter.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Case Converter Online</a></li>
+                                <li><a href="./unicode-text-cleaner.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Unicode Text Cleaner</a></li>
+                                <li><a href="./mocking-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mocking Text Generator</a></li>
+                                <li><a href="./emoji-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Emoji Text Generator</a></li>
+                                <li><a href="./upside-down-emoji.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Upside Down Emoji</a></li>
+                                <li><a href="./blank-text-generator.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Blank Text Generator</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="./aboutus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">About</a></li>
+                    <li><a href="./contactus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Contact</a></li>
+                    <li><a href="./privacypolicy.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="relative w-full max-w-6xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">ASCII艺术字生成器</h1>
+            
+            <div class="bg-black p-5 rounded-3xl">
+                <div class="mb-6">
+                    <label for="inputText" class="text-gray-200 block mb-2">输入文本</label>
+                    <input 
+                        type="text" 
+                        id="inputText" 
+                        placeholder="请输入要转换的文本（建议使用英文）..."
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        maxlength="10"
+                    />
+                </div>
+
+                <div class="mb-6">
+                    <label class="text-gray-200 block mb-4">选择字体风格</label>
+                    <div class="style-selector">
+                        <div class="style-option selected" onclick="selectStyle('big', this)">
+                            <div class="style-title">大字体</div>
+                            <div class="style-preview"> _   _ 
+| | | |
+| |_| |
+ \___/ </div>
+                        </div>
+                        <div class="style-option" onclick="selectStyle('small', this)">
+                            <div class="style-title">小字体</div>
+                            <div class="style-preview">┌─┐
+├─┤
+└─┘</div>
+                        </div>
+                        <div class="style-option" onclick="selectStyle('block', this)">
+                            <div class="style-title">方块字</div>
+                            <div class="style-preview">██
+██
+██</div>
+                        </div>
+                        <div class="style-option" onclick="selectStyle('shadow', this)">
+                            <div class="style-title">阴影字</div>
+                            <div class="style-preview">╦ ╦
+╠═╣
+╩ ╩</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label for="asciiResult" class="text-gray-200 block mb-2">ASCII艺术字结果</label>
+                    <div class="relative">
+                        <textarea 
+                            id="asciiResult" 
+                            class="bg-gray-900 border-none outline-none w-full p-3 text-white rounded-lg ascii-result"
+                            rows="10"
+                            readonly
+                        ></textarea>
+                        <button 
+                            class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                            onclick="copyToClipboard()"
+                        >
+                            复制
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-center mb-6">
+                    <button 
+                        onclick="generateAscii()" 
+                        class="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                    >
+                        生成ASCII艺术字
+                    </button>
+                    <button 
+                        onclick="clearAll()" 
+                        class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors ml-4"
+                    >
+                        清空
+                    </button>
+                </div>
+
+                <div class="mt-6 text-gray-400 text-sm">
+                    <p>💡 提示：ASCII艺术字使用ASCII字符创建文字艺术效果。建议使用英文字符，中文字符可能无法正确显示。字符长度建议控制在10个字符以内。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let selectedStyle = 'big';
+
+        const asciiPatterns = {
+            big: {
+                'A': [
+                    " █████  ",
+                    "██   ██ ",
+                    "███████ ",
+                    "██   ██ ",
+                    "██   ██ "
+                ],
+                'B': [
+                    "██████  ",
+                    "██   ██ ",
+                    "██████  ",
+                    "██   ██ ",
+                    "██████  "
+                ],
+                'C': [
+                    " ██████ ",
+                    "██      ",
+                    "██      ",
+                    "██      ",
+                    " ██████ "
+                ],
+                'D': [
+                    "██████  ",
+                    "██   ██ ",
+                    "██   ██ ",
+                    "██   ██ ",
+                    "██████  "
+                ],
+                'E': [
+                    "███████ ",
+                    "██      ",
+                    "█████   ",
+                    "██      ",
+                    "███████ "
+                ],
+                'F': [
+                    "███████ ",
+                    "██      ",
+                    "█████   ",
+                    "██      ",
+                    "██      "
+                ],
+                'G': [
+                    " ██████ ",
+                    "██      ",
+                    "██   ██ ",
+                    "██   ██ ",
+                    " ██████ "
+                ],
+                'H': [
+                    "██   ██ ",
+                    "██   ██ ",
+                    "███████ ",
+                    "██   ██ ",
+                    "██   ██ "
+                ],
+                'I': [
+                    "██ ",
+                    "██ ",
+                    "██ ",
+                    "██ ",
+                    "██ "
+                ],
+                'J': [
+                    "     ██ ",
+                    "     ██ ",
+                    "     ██ ",
+                    "██   ██ ",
+                    " ██████ "
+                ],
+                'K': [
+                    "██   ██ ",
+                    "██  ██  ",
+                    "█████   ",
+                    "██  ██  ",
+                    "██   ██ "
+                ],
+                'L': [
+                    "██      ",
+                    "██      ",
+                    "██      ",
+                    "██      ",
+                    "███████ "
+                ],
+                'M': [
+                    "███    ███ ",
+                    "████  ████ ",
+                    "██ ████ ██ ",
+                    "██  ██  ██ ",
+                    "██      ██ "
+                ],
+                'N': [
+                    "███    ██ ",
+                    "████   ██ ",
+                    "██ ██  ██ ",
+                    "██  ██ ██ ",
+                    "██   ████ "
+                ],
+                'O': [
+                    " ██████  ",
+                    "██    ██ ",
+                    "██    ██ ",
+                    "██    ██ ",
+                    " ██████  "
+                ],
+                'P': [
+                    "██████  ",
+                    "██   ██ ",
+                    "██████  ",
+                    "██      ",
+                    "██      "
+                ],
+                'Q': [
+                    " ██████  ",
+                    "██    ██ ",
+                    "██ ██ ██ ",
+                    "██  ████ ",
+                    " ███████ "
+                ],
+                'R': [
+                    "██████  ",
+                    "██   ██ ",
+                    "██████  ",
+                    "██   ██ ",
+                    "██   ██ "
+                ],
+                'S': [
+                    " ██████ ",
+                    "██      ",
+                    " █████  ",
+                    "     ██ ",
+                    " ██████ "
+                ],
+                'T': [
+                    "████████",
+                    "   ██   ",
+                    "   ██   ",
+                    "   ██   ",
+                    "   ██   "
+                ],
+                'U': [
+                    "██    ██",
+                    "██    ██",
+                    "██    ██",
+                    "██    ██",
+                    " ██████ "
+                ],
+                'V': [
+                    "██    ██",
+                    "██    ██",
+                    "██    ██",
+                    " ██  ██ ",
+                    "  ████  "
+                ],
+                'W': [
+                    "██      ██",
+                    "██  ██  ██",
+                    "██ ████ ██",
+                    "████  ████",
+                    "███    ███"
+                ],
+                'X': [
+                    "██   ██",
+                    " ██ ██ ",
+                    "  ███  ",
+                    " ██ ██ ",
+                    "██   ██"
+                ],
+                'Y': [
+                    "██   ██",
+                    " ██ ██ ",
+                    "  ███  ",
+                    "   ██  ",
+                    "   ██  "
+                ],
+                'Z': [
+                    "███████",
+                    "    ██ ",
+                    "   ██  ",
+                    "  ██   ",
+                    "███████"
+                ],
+                '0': [
+                    " ██████ ",
+                    "██    ██",
+                    "██    ██",
+                    "██    ██",
+                    " ██████ "
+                ],
+                '1': [
+                    "  ██  ",
+                    " ███  ",
+                    "  ██  ",
+                    "  ██  ",
+                    "██████"
+                ],
+                '2': [
+                    "██████ ",
+                    "     ██",
+                    "██████ ",
+                    "██     ",
+                    "███████"
+                ],
+                '3': [
+                    "██████ ",
+                    "     ██",
+                    "██████ ",
+                    "     ██",
+                    "██████ "
+                ],
+                '4': [
+                    "██   ██",
+                    "██   ██",
+                    "███████",
+                    "     ██",
+                    "     ██"
+                ],
+                '5': [
+                    "███████",
+                    "██     ",
+                    "██████ ",
+                    "     ██",
+                    "██████ "
+                ],
+                '6': [
+                    " ██████",
+                    "██     ",
+                    "██████ ",
+                    "██   ██",
+                    " ██████"
+                ],
+                '7': [
+                    "███████",
+                    "     ██",
+                    "    ██ ",
+                    "   ██  ",
+                    "  ██   "
+                ],
+                '8': [
+                    " ██████",
+                    "██   ██",
+                    " ██████",
+                    "██   ██",
+                    " ██████"
+                ],
+                '9': [
+                    " ██████",
+                    "██   ██",
+                    " ██████",
+                    "     ██",
+                    " ██████"
+                ],
+                ' ': [
+                    "   ",
+                    "   ",
+                    "   ",
+                    "   ",
+                    "   "
+                ]
+            },
+            small: {
+                'A': ["┌─┐", "├─┤", "┴ ┴"],
+                'B': ["┌─┐", "├─┤", "└─┘"],
+                'C': ["┌─┐", "│  ", "└─┘"],
+                'D': ["┌─┐", "│ │", "└─┘"],
+                'E': ["┌─┐", "├─ ", "└─┘"],
+                'F': ["┌─┐", "├─ ", "┴  "],
+                'G': ["┌─┐", "│ ┬", "└─┘"],
+                'H': ["┬ ┬", "├─┤", "┴ ┴"],
+                'I': ["┬", "│", "┴"],
+                'J': ["  ┬", "  │", "└─┘"],
+                'K': ["┬ ┬", "├┴┐", "┴ ┴"],
+                'L': ["┬  ", "│  ", "└─┘"],
+                'M': ["┌┬┐", "│││", "┴ ┴"],
+                'N': ["┌┐┌", "│││", "┘└┘"],
+                'O': ["┌─┐", "│ │", "└─┘"],
+                'P': ["┌─┐", "├─┘", "┴  "],
+                'Q': ["┌─┐", "│ │", "└─┼"],
+                'R': ["┬─┐", "├┬┘", "┴└─"],
+                'S': ["┌─┐", "└─┐", "└─┘"],
+                'T': ["┌┬┐", " │ ", " ┴ "],
+                'U': ["┬ ┬", "│ │", "└─┘"],
+                'V': ["┬ ┬", "│ │", "└┴┘"],
+                'W': ["┬ ┬", "│││", "└┴┘"],
+                'X': ["─┐┌", " ├┤", "─┘└"],
+                'Y': ["┬ ┬", "└┬┘", " ┴ "],
+                'Z': ["┌─┐", "┌─┘", "└─┘"],
+                '0': ["┌─┐", "│ │", "└─┘"],
+                '1': [" ┐", " │", " ┴"],
+                '2': ["┌─┐", "┌─┘", "└─┘"],
+                '3': ["┌─┐", "├─┤", "└─┘"],
+                '4': ["┬ ┬", "└─┤", "  ┴"],
+                '5': ["┌─┐", "└─┐", "└─┘"],
+                '6': ["┌─┐", "├─┐", "└─┘"],
+                '7': ["┌─┐", "  │", "  ┴"],
+                '8': ["┌─┐", "├─┤", "└─┘"],
+                '9': ["┌─┐", "└─┤", "└─┘"],
+                ' ': [" ", " ", " "]
+            }
+        };
+
+        function selectStyle(style, element) {
+            selectedStyle = style;
+            document.querySelectorAll('.style-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            // Auto-generate if there's text
+            if (document.getElementById('inputText').value.trim()) {
+                generateAscii();
+            }
+        }
+
+        function generateAscii() {
+            const inputText = document.getElementById('inputText').value.toUpperCase();
+            const resultArea = document.getElementById('asciiResult');
+            
+            if (!inputText.trim()) {
+                resultArea.value = '';
+                return;
+            }
+
+            const patterns = asciiPatterns[selectedStyle];
+            let result = [];
+            
+            // Initialize result lines
+            const maxLines = Math.max(...Object.values(patterns).map(p => p.length));
+            for (let i = 0; i < maxLines; i++) {
+                result[i] = '';
+            }
+            
+            // Process each character
+            for (let char of inputText) {
+                if (patterns[char]) {
+                    const charPattern = patterns[char];
+                    for (let i = 0; i < maxLines; i++) {
+                        result[i] += (charPattern[i] || ' '.repeat(charPattern[0].length)) + ' ';
+                    }
+                } else {
+                    // Unknown character, use space
+                    for (let i = 0; i < maxLines; i++) {
+                        result[i] += '   ';
+                    }
+                }
+            }
+            
+            resultArea.value = result.join('\n');
+        }
+
+        function copyToClipboard() {
+            const resultArea = document.getElementById('asciiResult');
+            resultArea.select();
+            document.execCommand('copy');
+            
+            // Show feedback
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '已复制!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        }
+
+        function clearAll() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('asciiResult').value = '';
+        }
+
+        // Dropdown functionality
+        function toggleDropdown() {
+            const dropdown = document.getElementById('tools-dropdown-menu');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('tools-dropdown');
+            const dropdownMenu = document.getElementById('tools-dropdown-menu');
+            
+            if (!dropdown.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        // Auto-generate on input
+        document.getElementById('inputText').addEventListener('input', function() {
+            if (this.value.trim()) {
+                generateAscii();
+            } else {
+                document.getElementById('asciiResult').value = '';
+            }
+        });
+    </script>
+</body>
+</html> 
