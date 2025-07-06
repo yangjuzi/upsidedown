@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook 粗体文字生成器</title>
+    <title>Facebook Bold Text Generator - Create Bold Facebook Text</title>
     <link rel="shortcut icon" href="./favicon.png">
     <script src="./tailwind.3.4.1.js"></script>
     <style>
@@ -23,10 +23,10 @@
     <nav class="bg-black border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 md:items-center">
                     <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
                     <li class="relative" id="tools-dropdown">
-                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:px-3 md:py-2 md:w-auto" onclick="toggleDropdown()">
                             Tools
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -52,9 +52,6 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="./aboutus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">About</a></li>
-                    <li><a href="./contactus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Contact</a></li>
-                    <li><a href="./privacypolicy.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>
@@ -62,14 +59,14 @@
 
     <main class="container mx-auto px-4 py-8">
         <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
-            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">Facebook 粗体文字生成器</h1>
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">Facebook Bold Text Generator</h1>
             
             <div class="bg-black p-5 rounded-3xl">
                 <div class="mb-6">
-                    <label for="inputText" class="text-gray-200 block mb-2">输入文本</label>
+                    <label for="inputText" class="text-gray-200 block mb-2">Input Text</label>
                     <textarea 
                         id="inputText" 
-                        placeholder="请输入你要转换为粗体的文本..."
+                        placeholder="Enter the text you want to make bold..."
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         rows="3"
                     ></textarea>
@@ -77,73 +74,74 @@
 
                 <div class="space-y-4">
                     <div class="text-left">
-                        <label class="text-gray-200 block mb-2">𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸 𝗽𝗿𝗲𝗳𝗲𝗿𝗿𝗲𝗱 𝗯𝗼𝗹𝗱</label>
+                        <label class="text-gray-200 block mb-2">𝗦𝗮𝗻𝘀-𝗦𝗲𝗿𝗶𝗳 𝗕𝗼𝗹𝗱</label>
                         <div class="relative">
                             <textarea 
-                                id="facebookBold" 
-                                class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg bold-result"
-                                rows="3"
+                                id="boldSans" 
+                                class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg font-result"
+                                rows="2"
                                 readonly
                             ></textarea>
                             <button 
                                 class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
-                                onclick="copyToClipboard('facebookBold')"
+                                onclick="copyToClipboard('boldSans')"
                             >
-                                复制
+                                Copy
                             </button>
                         </div>
                     </div>
 
                     <div class="text-left">
-                        <label class="text-gray-200 block mb-2">𝙈𝙖𝙩 𝘽𝙤𝙡𝙙</label>
+                        <label class="text-gray-200 block mb-2">𝐒𝐞𝐫𝐢𝐟 𝐁𝐨𝐥𝐝</label>
                         <div class="relative">
                             <textarea 
-                                id="mathBold" 
-                                class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg bold-result"
-                                rows="3"
+                                id="boldSerif" 
+                                class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg font-result"
+                                rows="2"
                                 readonly
                             ></textarea>
                             <button 
                                 class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
-                                onclick="copyToClipboard('mathBold')"
+                                onclick="copyToClipboard('boldSerif')"
                             >
-                                复制
+                                Copy
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="facebook-preview">
-                    <h3>📘 Facebook 预览效果</h3>
-                    <div class="preview-text" id="facebookPreview">
-                        在这里可以预览你的粗体文字在Facebook上的显示效果
+                <div class="mt-6 p-4 bg-gray-800 rounded-lg">
+                    <h3 class="text-gray-200 font-bold mb-2">💡 Facebook Preview</h3>
+                    <div class="text-gray-400 text-sm mb-2">How it looks on Facebook:</div>
+                    <div class="bg-gray-700 p-3 rounded text-white font-bold" id="facebookPreview">
+                        Your bold text will appear here
                     </div>
                 </div>
 
                 <div class="mt-6">
-                    <h3 class="text-lg font-bold mb-4 text-purple-400">🚀 快速示例 (点击使用)</h3>
+                    <h3 class="text-lg font-bold mb-4 text-purple-400">🚀 Quick Examples (Click to Use)</h3>
                     <div class="quick-examples">
                         <div class="example-item" onclick="useExample('𝗛𝗲𝗹𝗹𝗼 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸!')">
                             <div class="example-text">𝗛𝗲𝗹𝗹𝗼 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸!</div>
-                            <div class="example-label">问候语</div>
+                            <div class="example-label">Greeting</div>
                         </div>
                         <div class="example-item" onclick="useExample('🔥 𝗛𝗼𝘁 𝗗𝗲𝗮𝗹 🔥')">
                             <div class="example-text">🔥 𝗛𝗼𝘁 𝗗𝗲𝗮𝗹 🔥</div>
-                            <div class="example-label">促销活动</div>
+                            <div class="example-label">Promotion</div>
                         </div>
                         <div class="example-item" onclick="useExample('💡 𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁')">
                             <div class="example-text">💡 𝗜𝗺𝗽𝗼𝗿𝘁𝗮𝗻𝘁</div>
-                            <div class="example-label">重要通知</div>
+                            <div class="example-label">Important Notice</div>
                         </div>
                         <div class="example-item" onclick="useExample('🎉 𝗖𝗼𝗻𝗴𝗿𝗮𝘁𝘂𝗹𝗮𝘁𝗶𝗼𝗻𝘀! 🎉')">
                             <div class="example-text">🎉 𝗖𝗼𝗻𝗴𝗿𝗮𝘁𝘂𝗹𝗮𝘁𝗶𝗼𝗻𝘀! 🎉</div>
-                            <div class="example-label">庆祝祝贺</div>
+                            <div class="example-label">Congratulations</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-6 text-gray-400 text-sm">
-                    <p>💡 提示：这些粗体文字特别适用于Facebook帖子、评论和状态更新。它们在Facebook的深色和浅色主题下都有良好的显示效果。</p>
+                    <p>💡 Tips: These bold text styles are specially optimized for Facebook posts, comments, and status updates. They display well on both Facebook's dark and light themes.</p>
                 </div>
             </div>
         </div>
@@ -171,10 +169,10 @@
             const facebookBoldText = convertText(inputText, facebookBoldMap);
             const mathBoldText = convertText(inputText, mathBoldMap);
             
-            document.getElementById('facebookBold').value = facebookBoldText;
-            document.getElementById('mathBold').value = mathBoldText;
+            document.getElementById('boldSans').value = facebookBoldText;
+            document.getElementById('boldSerif').value = mathBoldText;
             
-            document.getElementById('facebookPreview').textContent = facebookBoldText || '在这里可以预览你的粗体文字在Facebook上的显示效果';
+            document.getElementById('facebookPreview').textContent = facebookBoldText || 'Your bold text will appear here';
         }
 
         function useExample(exampleText) {
@@ -189,7 +187,7 @@
             
             const button = element.parentElement.querySelector('button');
             const originalText = button.textContent;
-            button.textContent = '已复制!';
+            button.textContent = 'Copied!';
             setTimeout(() => {
                 button.textContent = originalText;
             }, 2000);
@@ -211,5 +209,21 @@
 
         document.getElementById('inputText').addEventListener('input', updateAllBoldStyles);
     </script>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">&copy; 2025 Text Tools. All rights reserved.</p>
+                </div>
+                <div class="flex flex-wrap justify-center md:justify-end space-x-6">
+                    <a href="./aboutus.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">About Us</a>
+                    <a href="./contactus.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Contact Us</a>
+                    <a href="./terms-of-service.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Terms of Service</a>
+                    <a href="./privacypolicy.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>腐蚀文字生成器 - Zalgo Text Generator</title>
-    <meta name="description" content="生成腐蚀文字效果，创建神秘怪异的文本样式">
+    <title>Zalgo Text Generator - Create Corrupted Text</title>
+    <meta name="description" content="Generate corrupted text effects, create mysterious and eerie text styles">
     <link rel="shortcut icon" href="./favicon.png">
     <script src="./tailwind.3.4.1.js"></script>
     <style>
@@ -41,10 +41,10 @@
     <nav class="bg-black border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 md:items-center">
                     <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
                     <li class="relative" id="tools-dropdown">
-                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:px-3 md:py-2 md:w-auto" onclick="toggleDropdown()">
                             Tools
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -78,39 +78,39 @@
 
     <main class="container mx-auto px-4 py-8">
         <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
-            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">腐蚀文字生成器</h1>
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">Zalgo Text Generator</h1>
             
             <div class="bg-black p-5 rounded-3xl">
                 <div class="mb-6">
-                    <label for="inputText" class="text-gray-200 block mb-2">输入文本</label>
+                    <label for="inputText" class="text-gray-200 block mb-2">Input Text</label>
                     <textarea 
                         id="inputText" 
-                        placeholder="请输入你要转换的文本..."
+                        placeholder="Enter the text you want to transform..."
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         rows="3"
                     ></textarea>
                 </div>
 
                 <div class="mb-6">
-                    <label class="text-gray-200 block mb-2">腐蚀强度</label>
+                    <label class="text-gray-200 block mb-2">Corruption Intensity</label>
                     <div class="flex items-center space-x-4">
                         <label class="text-gray-200 text-sm">
                             <input type="radio" name="intensity" value="light" checked class="mr-2">
-                            轻度
+                            Light
                         </label>
                         <label class="text-gray-200 text-sm">
                             <input type="radio" name="intensity" value="medium" class="mr-2">
-                            中度
+                            Medium
                         </label>
                         <label class="text-gray-200 text-sm">
                             <input type="radio" name="intensity" value="heavy" class="mr-2">
-                            重度
+                            Heavy
                         </label>
                     </div>
                 </div>
 
                 <div class="mb-6">
-                    <label for="zalgoText" class="text-gray-200 block mb-2">腐蚀文字结果</label>
+                    <label for="zalgoText" class="text-gray-200 block mb-2">Zalgo Text Result</label>
                     <div class="relative">
                         <textarea 
                             id="zalgoText" 
@@ -123,13 +123,13 @@
                             class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2"
                             onclick="copyToClipboard()"
                         >
-                            复制
+                            Copy
                         </button>
                     </div>
                 </div>
 
                 <div class="text-gray-400 text-sm">
-                    <p>💡 提示：腐蚀文字也称为Zalgo文字，通过在字符上下添加特殊Unicode字符来创建怪异的视觉效果。</p>
+                    <p>💡 Tips: Zalgo text, also known as corrupted text, creates eerie visual effects by adding special Unicode combining characters above and below regular characters.</p>
                 </div>
             </div>
         </div>
@@ -204,7 +204,7 @@
             
             const copyBtn = document.getElementById('copyBtn');
             const originalText = copyBtn.textContent;
-            copyBtn.textContent = '已复制!';
+            copyBtn.textContent = 'Copied!';
             setTimeout(() => {
                 copyBtn.textContent = originalText;
             }, 2000);
@@ -237,7 +237,7 @@
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
-                    <p class="text-sm">&copy; 2024 Text Tools. All rights reserved.</p>
+                    <p class="text-sm">&copy; 2025 Text Tools. All rights reserved.</p>
                 </div>
                 <div class="flex flex-wrap justify-center md:justify-end space-x-6">
                     <a href="./aboutus.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">About Us</a>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>二进制文本转换器 - Binary Text Converter</title>
-    <meta name="description" content="文本与二进制相互转换工具，支持双向转换">
+    <title>Binary Text Converter - Convert Text to Binary</title>
+    <meta name="description" content="Text and binary converter tool, supports bidirectional conversion">
     <link rel="shortcut icon" href="./favicon.png">
     <script src="./tailwind.3.4.1.js"></script>
     <style>
@@ -47,10 +47,10 @@
     <nav class="bg-black border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 md:items-center">
                     <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
                     <li class="relative" id="tools-dropdown">
-                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:px-3 md:py-2 md:w-auto" onclick="toggleDropdown()">
                             Tools
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -76,9 +76,6 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="./aboutus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">About</a></li>
-                    <li><a href="./contactus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Contact</a></li>
-                    <li><a href="./privacypolicy.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>
@@ -86,88 +83,90 @@
 
     <main class="container mx-auto px-4 py-8">
         <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
-            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">二进制文本转换器</h1>
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">Text ↔ Binary Converter</h1>
             
             <div class="bg-black p-5 rounded-3xl">
-                <div class="mb-8">
-                    <h2 class="text-xl text-gray-200 mb-4">文本转二进制</h2>
-                    <div class="mb-4">
-                        <label for="textInput" class="text-gray-200 block mb-2">输入文本</label>
-                        <textarea 
-                            id="textInput" 
-                            placeholder="请输入要转换为二进制的文本..."
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            rows="3"
-                        ></textarea>
-                    </div>
-                    <div class="text-left">
-                        <label class="text-gray-200 block mb-2">二进制结果</label>
-                        <div class="relative">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Text to Binary -->
+                    <div>
+                        <h2 class="text-xl text-purple-400 mb-4">📝 Text to Binary</h2>
+                        <div class="mb-4">
+                            <label for="textInput" class="text-gray-200 block mb-2">Input Text</label>
                             <textarea 
-                                id="binaryOutput" 
-                                class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg binary-result"
+                                id="textInput" 
+                                placeholder="Enter text to convert to binary..."
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 rows="5"
-                                readonly
                             ></textarea>
-                            <button 
-                                class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
-                                onclick="copyToClipboard('binaryOutput')"
-                            >
-                                复制
-                            </button>
+                        </div>
+                        <div class="mb-4">
+                            <label for="binaryOutput" class="text-gray-200 block mb-2">Binary Result</label>
+                            <div class="relative">
+                                <textarea 
+                                    id="binaryOutput" 
+                                    class="bg-gray-900 border-none outline-none w-full p-3 text-sm text-white rounded-lg"
+                                    rows="5"
+                                    readonly
+                                ></textarea>
+                                <button 
+                                    class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                    onclick="copyToClipboard('binaryOutput')"
+                                >
+                                    Copy
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="border-t border-gray-700 pt-8">
-                    <h2 class="text-xl text-gray-200 mb-4">二进制转文本</h2>
-                    <div class="mb-4">
-                        <label for="binaryInput" class="text-gray-200 block mb-2">输入二进制</label>
-                        <textarea 
-                            id="binaryInput" 
-                            placeholder="请输入二进制代码（如：01001000 01100101 01101100 01101100 01101111）..."
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 binary-result"
-                            rows="4"
-                        ></textarea>
-                    </div>
-                    <div class="text-left">
-                        <label class="text-gray-200 block mb-2">文本结果</label>
-                        <div class="relative">
+                    <!-- Binary to Text -->
+                    <div>
+                        <h2 class="text-xl text-purple-400 mb-4">📟 Binary to Text</h2>
+                        <div class="mb-4">
+                            <label for="binaryInput" class="text-gray-200 block mb-2">Binary Input</label>
                             <textarea 
-                                id="textOutput" 
-                                class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg"
-                                rows="3"
-                                readonly
+                                id="binaryInput" 
+                                placeholder="Enter binary code (e.g., 01001000 01100101 01101100 01101100 01101111)..."
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                rows="5"
                             ></textarea>
-                            <button 
-                                class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
-                                onclick="copyToClipboard('textOutput')"
-                            >
-                                复制
-                            </button>
+                        </div>
+                        <div class="mb-4">
+                            <label class="text-gray-200 block mb-2">Text Result</label>
+                            <div class="relative">
+                                <textarea 
+                                    id="textOutput" 
+                                    class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg"
+                                    rows="5"
+                                    readonly
+                                ></textarea>
+                                <button 
+                                    class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                                    onclick="copyToClipboard('textOutput')"
+                                >
+                                    Copy
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-8 space-y-2">
-                    <div class="flex justify-center space-x-4">
-                        <button 
-                            onclick="clearAll()" 
-                            class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
-                        >
-                            清空所有
-                        </button>
-                        <button 
-                            onclick="swapContent()" 
-                            class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
-                        >
-                            交换内容
-                        </button>
-                    </div>
+                <div class="mt-6 flex gap-4 justify-center">
+                    <button 
+                        class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium"
+                        onclick="clearAll()"
+                    >
+                        🗑️ Clear All
+                    </button>
+                    <button 
+                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium"
+                        onclick="swapContent()"
+                    >
+                        🔄 Swap
+                    </button>
                 </div>
 
                 <div class="mt-6 text-gray-400 text-sm">
-                    <p>💡 提示：此工具将文本转换为二进制（每个字符转换为8位二进制），支持双向转换。二进制数字之间用空格分隔。</p>
+                    <p>💡 Tips: This tool converts text to binary (each character converts to 8-bit binary) and supports bidirectional conversion. Binary numbers are separated by spaces.</p>
                 </div>
             </div>
         </div>
@@ -199,7 +198,7 @@
                     return String.fromCharCode(decimal);
                 }).join('');
             } catch (error) {
-                return '错误：无效的二进制格式';
+                return 'Error: Invalid binary format';
             }
         }
 
@@ -223,7 +222,7 @@
             // Show feedback
             const button = element.parentElement.querySelector('button');
             const originalText = button.textContent;
-            button.textContent = '已复制!';
+            button.textContent = 'Copied!';
             setTimeout(() => {
                 button.textContent = originalText;
             }, 2000);
@@ -275,5 +274,21 @@
         document.getElementById('textInput').addEventListener('input', updateBinaryOutput);
         document.getElementById('binaryInput').addEventListener('input', updateTextOutput);
     </script>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">&copy; 2025 Text Tools. All rights reserved.</p>
+                </div>
+                <div class="flex flex-wrap justify-center md:justify-end space-x-6">
+                    <a href="./aboutus.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">About Us</a>
+                    <a href="./contactus.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Contact Us</a>
+                    <a href="./terms-of-service.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Terms of Service</a>
+                    <a href="./privacypolicy.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 

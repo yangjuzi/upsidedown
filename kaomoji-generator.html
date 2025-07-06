@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>颜文字生成器 - Kaomoji Generator</title>
+    <title>Kaomoji Generator - Create Cute Emoticons</title>
     <link rel="shortcut icon" href="./favicon.png">
     <script src="./tailwind.3.4.1.js"></script>
     <style>
@@ -36,10 +36,10 @@
     <nav class="bg-black border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 md:items-center">
                     <li><a href="./index.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Home</a></li>
                     <li class="relative" id="tools-dropdown">
-                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:p-0 md:w-auto" onclick="toggleDropdown()">
+                        <button class="flex items-center justify-between w-full py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6] md:hover:bg-transparent md:border-0 md:hover:text-[#cb6ce6] md:px-3 md:py-2 md:w-auto" onclick="toggleDropdown()">
                             Tools
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -65,9 +65,6 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a href="./aboutus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">About</a></li>
-                    <li><a href="./contactus.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Contact</a></li>
-                    <li><a href="./privacypolicy.html" class="block py-2 px-3 text-gray-200 rounded hover:text-[#cb6ce6]">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>
@@ -75,17 +72,17 @@
 
     <main class="container mx-auto px-4 py-8">
         <div class="relative w-full max-w-6xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
-            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">颜文字生成器</h1>
+            <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">Kaomoji Generator</h1>
             
             <div class="bg-black p-5 rounded-3xl">
                 <div class="mb-6">
                     <div class="text-center mb-4">
-                        <p class="text-gray-400 text-sm">点击任意颜文字即可复制到剪贴板</p>
+                        <p class="text-gray-400 text-sm">Click any kaomoji to copy it to clipboard</p>
                     </div>
                     <div class="relative">
                         <textarea 
                             id="selectedKaomoji" 
-                            placeholder="选择的颜文字将显示在这里..."
+                            placeholder="Selected kaomoji will appear here..."
                             class="bg-gray-900 border-none outline-none w-full p-3 text-2xl text-white rounded-lg text-center"
                             rows="2"
                             readonly
@@ -95,13 +92,13 @@
                             class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
                             onclick="copySelected()"
                         >
-                            复制
+                            Copy
                         </button>
                     </div>
                 </div>
 
                 <div class="mb-8">
-                    <h2 class="text-xl font-bold mb-4 text-purple-400">😊 高兴</h2>
+                    <h2 class="text-xl font-bold mb-4 text-purple-400">😊 Happy</h2>
                     <div class="kaomoji-grid">
                         <div class="kaomoji-item" onclick="selectKaomoji('(◕‿◕)')">(◕‿◕)</div>
                         <div class="kaomoji-item" onclick="selectKaomoji('(｡◕‿◕｡)')">(｡◕‿◕｡)</div>
@@ -115,7 +112,7 @@
                 </div>
 
                 <div class="mb-8">
-                    <h2 class="text-xl font-bold mb-4 text-purple-400">😢 悲伤</h2>
+                    <h2 class="text-xl font-bold mb-4 text-purple-400">😢 Sad</h2>
                     <div class="kaomoji-grid">
                         <div class="kaomoji-item" onclick="selectKaomoji('(╥﹏╥)')">(╥﹏╥)</div>
                         <div class="kaomoji-item" onclick="selectKaomoji('(｡•́︿•̀｡)')">(｡•́︿•̀｡)</div>
@@ -129,7 +126,7 @@
                 </div>
 
                 <div class="mb-8">
-                    <h2 class="text-xl font-bold mb-4 text-purple-400">😠 愤怒</h2>
+                    <h2 class="text-xl font-bold mb-4 text-purple-400">😠 Angry</h2>
                     <div class="kaomoji-grid">
                         <div class="kaomoji-item" onclick="selectKaomoji('(╯°□°）╯︵ ┻━┻')">(╯°□°）╯︵ ┻━┻</div>
                         <div class="kaomoji-item" onclick="selectKaomoji('(ノಠ益ಠ)ノ彡┻━┻')">(ノಠ益ಠ)ノ彡┻━┻</div>
@@ -143,7 +140,7 @@
                 </div>
 
                 <div class="mb-8">
-                    <h2 class="text-xl font-bold mb-4 text-purple-400">😘 爱心</h2>
+                    <h2 class="text-xl font-bold mb-4 text-purple-400">😘 Love</h2>
                     <div class="kaomoji-grid">
                         <div class="kaomoji-item" onclick="selectKaomoji('(♥‿♥)')">(♥‿♥)</div>
                         <div class="kaomoji-item" onclick="selectKaomoji('(♥ω♥)')">(♥ω♥)</div>
@@ -157,7 +154,7 @@
                 </div>
 
                 <div class="mb-8">
-                    <h2 class="text-xl font-bold mb-4 text-purple-400">🤔 其他</h2>
+                    <h2 class="text-xl font-bold mb-4 text-purple-400">🤔 Others</h2>
                     <div class="kaomoji-grid">
                         <div class="kaomoji-item" onclick="selectKaomoji('¯\\_(ツ)_/¯')">¯\\_(ツ)_/¯</div>
                         <div class="kaomoji-item" onclick="selectKaomoji('ʕ•ᴥ•ʔ')">ʕ•ᴥ•ʔ</div>
@@ -171,7 +168,7 @@
                 </div>
 
                 <div class="mt-6 text-gray-400 text-sm">
-                    <p>💡 提示：颜文字是使用ASCII字符创建的可爱表情符号，广泛用于网络聊天和社交媒体。点击任意颜文字即可复制使用。</p>
+                    <p>💡 Tips: Kaomoji are cute emoticons created using ASCII characters, widely used in internet chat and social media. Click any kaomoji to copy and use it.</p>
                 </div>
             </div>
         </div>
@@ -188,7 +185,7 @@
             // Visual feedback
             const button = document.getElementById('copyBtn');
             const originalText = button.textContent;
-            button.textContent = '已复制!';
+            button.textContent = 'Copied!';
             setTimeout(() => {
                 button.textContent = originalText;
             }, 1500);
@@ -201,7 +198,7 @@
                 
                 const button = document.getElementById('copyBtn');
                 const originalText = button.textContent;
-                button.textContent = '已复制!';
+                button.textContent = 'Copied!';
                 setTimeout(() => {
                     button.textContent = originalText;
                 }, 1500);
@@ -237,5 +234,21 @@
             }
         });
     </script>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">&copy; 2025 Text Tools. All rights reserved.</p>
+                </div>
+                <div class="flex flex-wrap justify-center md:justify-end space-x-6">
+                    <a href="./aboutus.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">About Us</a>
+                    <a href="./contactus.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Contact Us</a>
+                    <a href="./terms-of-service.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Terms of Service</a>
+                    <a href="./privacypolicy.html" class="text-gray-400 hover:text-purple-400 transition-colors text-sm">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 
