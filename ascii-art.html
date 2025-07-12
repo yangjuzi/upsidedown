@@ -1,12 +1,111 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XHLSYJLB1K"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XHLSYJLB1K');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASCII Art Generator - Create ASCII Text Art</title>
     <meta name="description" content="Generate various ASCII art effects, create unique text art">
+    <meta name="keywords" content="ascii art generator, text art, ascii text, character art, terminal art">
+    <meta name="author" content="Text Tools">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://texttools.com/ascii-art.html">
+    <meta property="og:title" content="ASCII Art Generator - Create ASCII Text Art">
+    <meta property="og:description" content="Generate ASCII art from text with multiple font styles. Perfect for terminals, code comments, and retro designs.">
+    <meta property="og:image" content="https://texttools.com/favicon.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://texttools.com/ascii-art.html">
+    <meta property="twitter:title" content="ASCII Art Generator - Create ASCII Text Art">
+    <meta property="twitter:description" content="Generate ASCII art from text with multiple font styles. Perfect for terminals, code comments, and retro designs.">
+    <meta property="twitter:image" content="https://texttools.com/favicon.png">
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://texttools.com/ascii-art.html">
+    
     <link rel="shortcut icon" href="./favicon.png">
     <script src="./tailwind.3.4.1.js"></script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ASCII Art Generator",
+        "description": "Generate various ASCII art effects, create unique text art",
+        "url": "https://texttools.com/ascii-art.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://texttools.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Text Tools",
+                "item": "https://texttools.com/#tools"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "ASCII Art Generator",
+                "item": "https://texttools.com/ascii-art.html"
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is ASCII Art?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ASCII Art is a form of text art that uses ASCII characters to create images, designs, and stylized text. Our ASCII Art Generator converts regular text into large, decorative text art using various ASCII character patterns."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I use the ASCII Art Generator?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Enter your text (preferably short English text), select your preferred ASCII style (Block, Thin, Shadow, or Double), and the generator will create your ASCII art. Click 'Copy' to copy the result."
+                }
+            }
+        ]
+    }
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -112,6 +211,23 @@
         </div>
     </nav>
 
+    <!-- Breadcrumb Navigation -->
+    <nav class="bg-gray-800 py-3" aria-label="Breadcrumb">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <ol class="flex items-center space-x-2 text-sm">
+                <li>
+                    <a href="./index.html" class="text-gray-400 hover:text-purple-400 transition-colors">Home</a>
+                </li>
+                <li class="text-gray-500">/</li>
+                <li>
+                    <span class="text-gray-300">Text Tools</span>
+                </li>
+                <li class="text-gray-500">/</li>
+                <li class="text-purple-400 font-medium" aria-current="page">ASCII Art Generator</li>
+            </ol>
+        </div>
+    </nav>
+
     <main class="container mx-auto px-4 py-8">
         <div class="relative w-full max-w-6xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
             <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">ASCII Art Generator</h1>
@@ -161,6 +277,114 @@
             </div>
         </div>
     </main>
+
+    <!-- FAQ Section -->
+    <section class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="bg-gray-900 rounded-3xl p-8">
+            <h2 class="text-3xl font-bold text-center text-purple-400 mb-8">Frequently Asked Questions</h2>
+            
+            <div class="space-y-6">
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">What is ASCII Art?</h3>
+                    <p class="text-gray-300">ASCII Art is a form of text art that uses ASCII characters to create images, designs, and stylized text. Our ASCII Art Generator converts regular text into large, decorative text art using various ASCII character patterns and styles.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Why use ASCII Art?</h3>
+                    <p class="text-gray-300">ASCII Art creates visually striking text that stands out in plain text environments, adds retro computer aesthetic to your content, works in any text-based medium, and provides a creative way to display text without using images or special fonts.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">When should I use ASCII Art?</h3>
+                    <p class="text-gray-300">Use ASCII Art for creating banners, logos, headers, signatures, retro-style designs, command-line interfaces, email signatures, forum posts, coding projects, or when you need eye-catching text that works in plain text environments.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Where can I use ASCII Art?</h3>
+                    <p class="text-gray-300">ASCII Art works everywhere that supports text: terminals, command prompts, code comments, email signatures, forums, chat applications, social media, plain text documents, and any platform that displays monospace fonts properly.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Who can use this tool?</h3>
+                    <p class="text-gray-300">Developers, system administrators, gamers, retro computing enthusiasts, designers, artists, and anyone who appreciates text-based art can use our ASCII Art Generator. It's perfect for both technical and creative applications.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">How do I use the ASCII Art Generator?</h3>
+                    <p class="text-gray-300">Enter your text (preferably short English text), select your preferred ASCII style (Block, Thin, Shadow, or Double), and the generator will create your ASCII art. Click "Copy" to copy the result to your clipboard.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">What are the best practices for ASCII Art?</h3>
+                    <p class="text-gray-300">Keep text short (under 10 characters), use English letters for best results, choose monospace fonts for proper display, and consider your target platform's text width limitations. Some platforms may wrap or distort long ASCII art lines.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Tools Section -->
+    <section class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="bg-gray-900 rounded-3xl p-8">
+            <h2 class="text-3xl font-bold text-center text-purple-400 mb-8">Related Text Tools</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="./fancy-text.html" class="group bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-colors">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">✨</span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-purple-400">Fancy Text Generator</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Create stylish Unicode text with multiple decorative effects.</p>
+                </a>
+
+                <a href="./bold-text-generator.html" class="group bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-colors">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">𝗕</span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-purple-400">Bold Text Generator</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Generate bold Unicode text in multiple styles and formats.</p>
+                </a>
+
+                <a href="./zalgo-text.html" class="group bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-colors">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">🌀</span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-purple-400">Zalgo Text Generator</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Create corrupted, glitchy text effects for horror themes.</p>
+                </a>
+
+                <a href="./upside-down-emoji.html" class="group bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-colors">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">🙃</span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-purple-400">Upside Down Text</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Flip your text upside down for fun and creative effects.</p>
+                </a>
+
+                <a href="./text-repeater.html" class="group bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-colors">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">🔄</span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-purple-400">Text Repeater</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Duplicate text multiple times with custom separators.</p>
+                </a>
+
+                <a href="./binary-text.html" class="group bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-colors">
+                    <div class="flex items-center mb-3">
+                        <span class="text-2xl mr-3">01</span>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-purple-400">Binary Converter</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Convert text to binary code and vice versa.</p>
+                </a>
+            </div>
+
+            <div class="text-center mt-8">
+                <a href="./index.html" class="inline-flex items-center px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors">
+                    <span class="mr-2">🔧</span>
+                    View All Text Tools
+                </a>
+            </div>
+        </div>
+    </section>
 
     <script>
         let selectedStyle = 'big';

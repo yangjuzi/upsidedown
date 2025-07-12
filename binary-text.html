@@ -1,12 +1,115 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XHLSYJLB1K"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XHLSYJLB1K');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Binary Text Converter - Convert Text to Binary</title>
     <meta name="description" content="Text and binary converter tool, supports bidirectional conversion">
+    <meta name="keywords" content="binary converter, text to binary, binary to text, binary code, text encoder, binary decoder, programming tools, computer science">
+    <meta name="author" content="UpsideDown Text Tools">
+    <link rel="canonical" href="https://upsidedowntext.io/binary-text.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Binary Text Converter - Convert Text to Binary">
+    <meta property="og:description" content="Convert text to binary code and vice versa. Perfect for programming, education, and creating encoded messages.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://upsidedowntext.io/binary-text.html">
+    <meta property="og:image" content="https://upsidedowntext.io/favicon.png">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Binary Text Converter - Convert Text to Binary">
+    <meta name="twitter:description" content="Convert text to binary code and vice versa. Perfect for programming, education, and creating encoded messages.">
+    <meta name="twitter:image" content="https://upsidedowntext.io/favicon.png">
+    
     <link rel="shortcut icon" href="./favicon.png">
     <script src="./tailwind.3.4.1.js"></script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Binary Text Converter",
+        "description": "Convert text to binary code and vice versa with our free online tool",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "permissions": "browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "UpsideDown Text Tools"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is Binary Text Converter?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Binary Text Converter transforms regular text into binary code (0s and 1s) and vice versa. It's perfect for understanding how computers store and process text data, educational purposes, and creating unique encoded messages."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why use Binary Text Conversion?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Binary conversion helps in learning computer science concepts, creating encoded messages for fun, understanding data storage, debugging programming issues, and educational demonstrations of how computers process text at the lowest level."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I use the Binary Text Converter?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Simply paste your text in the input field to convert it to binary, or paste binary code to convert it back to text. The tool automatically performs the conversion and shows results instantly."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://upsidedowntext.io/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Binary Text Converter",
+                "item": "https://upsidedowntext.io/binary-text.html"
+            }
+        ]
+    }
+    </script>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,6 +147,17 @@
     </style>
 </head>
 <body class="bg-black text-gray-200 font-sans">
+    <!-- Breadcrumb Navigation -->
+    <nav class="bg-gray-800 py-2">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center space-x-2 text-sm text-gray-300">
+                <a href="./index.html" class="hover:text-purple-400 transition-colors">Home</a>
+                <span>/</span>
+                <span class="text-purple-400">Binary Text Converter</span>
+            </div>
+        </div>
+    </nav>
+
     <nav class="bg-black border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -171,6 +285,101 @@
             </div>
         </div>
     </main>
+
+    <!-- FAQ Section -->
+    <section class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="bg-gray-900 rounded-3xl p-8">
+            <h2 class="text-3xl font-bold text-center text-purple-400 mb-8">Frequently Asked Questions</h2>
+            
+            <div class="space-y-6">
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">What is Binary Text Converter?</h3>
+                    <p class="text-gray-300">Our Binary Text Converter transforms regular text into binary code (0s and 1s) and vice versa. It's perfect for understanding how computers store and process text data, educational purposes, and creating unique encoded messages.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Why use Binary Text Conversion?</h3>
+                    <p class="text-gray-300">Binary conversion helps in learning computer science concepts, creating encoded messages for fun, understanding data storage, debugging programming issues, and educational demonstrations of how computers process text at the lowest level.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">When should I use Binary Text Converter?</h3>
+                    <p class="text-gray-300">Use binary conversion when studying computer science, creating puzzles or games, encoding secret messages, learning about data representation, debugging encoding issues, or when you need to understand how text is stored in binary format.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Where can I use Binary Text?</h3>
+                    <p class="text-gray-300">Binary text can be used in educational materials, programming exercises, puzzle games, secret message systems, computer science demonstrations, and anywhere you need to show the binary representation of text data.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Who can benefit from Binary Text Converter?</h3>
+                    <p class="text-gray-300">Students, programmers, computer science educators, puzzle creators, cybersecurity professionals, and anyone interested in understanding how computers process and store text information can benefit from our binary converter.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">How do I use the Binary Text Converter?</h3>
+                    <p class="text-gray-300">Simply paste your text in the input field to convert it to binary, or paste binary code to convert it back to text. The tool automatically performs the conversion and shows results instantly. You can copy the results with one click.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Is the Binary Text Converter accurate?</h3>
+                    <p class="text-gray-300">Yes, our converter uses standard ASCII encoding to ensure accurate conversion between text and binary. Each character is converted to its 8-bit binary representation, and the reverse conversion maintains perfect accuracy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Tools Section -->
+    <section class="container mx-auto px-4 py-8 max-w-6xl">
+        <div class="bg-gray-900 rounded-3xl p-8">
+            <h2 class="text-3xl font-bold text-center text-purple-400 mb-8">Related Programming Tools</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./case-converter.html" class="hover:text-purple-400">Case Converter</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Convert text between different cases - uppercase, lowercase, camelCase, and more for programming needs.</p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./unicode-text-cleaner.html" class="hover:text-purple-400">Unicode Text Cleaner</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Clean and normalize Unicode text by removing unwanted characters and formatting.</p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./text-repeater.html" class="hover:text-purple-400">Text Repeater</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Repeat text multiple times with custom separators for testing and pattern creation.</p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./ascii-art.html" class="hover:text-purple-400">ASCII Art Generator</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Create ASCII art from text for documentation, comments, and creative programming projects.</p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./blank-text-generator.html" class="hover:text-purple-400">Blank Text Generator</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Generate invisible Unicode characters for testing edge cases and special formatting.</p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./fancy-text.html" class="hover:text-purple-400">Fancy Text Generator</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Transform text into stylish Unicode fonts perfect for documentation and user interfaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
         function textToBinary(text) {

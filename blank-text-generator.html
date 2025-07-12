@@ -5,8 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blank Text Generator - Invisible Unicode Characters</title>
     <meta name="description" content="Generate invisible blank text using Unicode characters. Perfect for Discord, social media, and creating empty messages.">
+    <meta name="keywords" content="blank text generator, invisible characters, empty text, Unicode characters, Discord blank text, invisible text, zero width space, empty message">
+    <meta name="author" content="UpsideDown Text Tools">
+    <link rel="canonical" href="https://upsidedowntext.io/blank-text-generator.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Blank Text Generator - Invisible Unicode Characters">
+    <meta property="og:description" content="Generate invisible blank text using Unicode characters. Perfect for Discord, social media, and creating empty messages.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://upsidedowntext.io/blank-text-generator.html">
+    <meta property="og:image" content="https://upsidedowntext.io/favicon.png">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Blank Text Generator - Invisible Unicode Characters">
+    <meta name="twitter:description" content="Generate invisible blank text using Unicode characters. Perfect for Discord, social media, and creating empty messages.">
+    <meta name="twitter:image" content="https://upsidedowntext.io/favicon.png">
+    
     <link rel="shortcut icon" href="./favicon.png">
     <script src="./tailwind.3.4.1.js"></script>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Blank Text Generator",
+        "description": "Generate invisible blank text using Unicode characters for Discord, social media, and empty messages",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "permissions": "browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "UpsideDown Text Tools"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is Blank Text Generator?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Blank Text Generator creates invisible Unicode characters that appear empty but contain hidden text. Perfect for Discord, social media, and creating seemingly empty messages that bypass text requirements."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why use Blank Text?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Blank text is useful for creating empty Discord names, bypassing minimum character requirements, creating invisible separators, testing applications, and creative text formatting on social media platforms."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I use the Blank Text Generator?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Select your preferred invisible character type, choose the length, and click generate. The invisible text will be created and you can copy it to use anywhere that supports Unicode characters."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://upsidedowntext.io/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blank Text Generator",
+                "item": "https://upsidedowntext.io/blank-text-generator.html"
+            }
+        ]
+    }
+    </script>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -129,6 +223,17 @@
     </style>
 </head>
 <body class="bg-black text-gray-200 font-sans">
+    <!-- Breadcrumb Navigation -->
+    <nav class="bg-gray-800 py-2">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center space-x-2 text-sm text-gray-300">
+                <a href="./index.html" class="hover:text-purple-400 transition-colors">Home</a>
+                <span>/</span>
+                <span class="text-purple-400">Blank Text Generator</span>
+            </div>
+        </div>
+    </nav>
+
     <nav class="bg-black border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -198,22 +303,22 @@
                     </div>
                     <div class="blank-type" onclick="setBlankType('invisible-separator')">
                         <h3>Invisible Separator</h3>
-                        <div class="description">Function application separator</div>
-                        <div class="unicode-info">U+2061</div>
+                        <div class="description">Invisible separator character</div>
+                        <div class="unicode-info">U+2063</div>
                     </div>
-                    <div class="blank-type" onclick="setBlankType('invisible-times')">
-                        <h3>Invisible Times</h3>
-                        <div class="description">Invisible multiplication sign</div>
-                        <div class="unicode-info">U+2062</div>
+                    <div class="blank-type" onclick="setBlankType('function-application')">
+                        <h3>Function Application</h3>
+                        <div class="description">Function application character</div>
+                        <div class="unicode-info">U+2061</div>
                     </div>
                 </div>
 
                 <div class="length-controls">
                     <div>
-                        <label for="blankLength" class="text-gray-200 block mb-2 text-left">Number of Characters</label>
+                        <label for="lengthInput" class="text-gray-200 block mb-2 text-left">Length</label>
                         <input 
                             type="number" 
-                            id="blankLength" 
+                            id="lengthInput" 
                             min="1" 
                             max="1000" 
                             value="1"
@@ -228,80 +333,160 @@
                     </button>
                 </div>
 
-                <div class="mb-4">
-                    <label class="text-gray-200 block mb-2 text-left">Quick Lengths</label>
-                    <div class="quick-lengths">
-                        <div class="quick-length" onclick="setLength(1)">1</div>
-                        <div class="quick-length" onclick="setLength(5)">5</div>
-                        <div class="quick-length" onclick="setLength(10)">10</div>
-                        <div class="quick-length" onclick="setLength(25)">25</div>
-                        <div class="quick-length" onclick="setLength(50)">50</div>
-                        <div class="quick-length" onclick="setLength(100)">100</div>
-                    </div>
+                <div class="quick-lengths">
+                    <div class="quick-length" onclick="setLength(1)">1</div>
+                    <div class="quick-length" onclick="setLength(5)">5</div>
+                    <div class="quick-length" onclick="setLength(10)">10</div>
+                    <div class="quick-length" onclick="setLength(20)">20</div>
+                    <div class="quick-length" onclick="setLength(50)">50</div>
+                    <div class="quick-length" onclick="setLength(100)">100</div>
                 </div>
 
                 <div class="preview-box" id="previewBox">
-                    <div class="preview-text" id="previewText">
-                        Click generate to create blank text
-                    </div>
-                    <div class="copy-indicator" id="copyIndicator">
-                        Ready to copy
-                    </div>
+                    <div class="preview-text">Generated blank text will appear here</div>
+                    <div class="copy-indicator" id="copyIndicator" style="display: none;">Copied!</div>
                 </div>
 
                 <div class="mb-6">
-                    <div class="flex justify-center space-x-4 mb-4">
+                    <label for="outputText" class="text-gray-200 block mb-2 text-left">Generated Blank Text</label>
+                    <div class="relative">
+                        <textarea 
+                            id="outputText" 
+                            class="bg-gray-900 border-none outline-none w-full p-3 text-lg text-white rounded-lg"
+                            rows="3"
+                            readonly
+                            placeholder="Your blank text will appear here..."
+                        ></textarea>
                         <button 
-                            onclick="copyBlankText()"
-                            class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition-colors"
+                            class="absolute top-2 right-2 text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded p-2 text-sm"
+                            onclick="copyToClipboard()"
                         >
-                            Copy Blank Text
-                        </button>
-                        <button 
-                            onclick="testBlankText()"
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-                        >
-                            Test in Textarea
+                            Copy
                         </button>
                     </div>
-                </div>
-
-                <div class="mb-6">
-                    <label for="testArea" class="text-gray-200 block mb-2 text-left">Test Area (paste your blank text here)</label>
-                    <textarea 
-                        id="testArea" 
-                        class="bg-gray-900 border border-gray-600 text-white text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        rows="3"
-                        placeholder="Paste your blank text here to test if it's truly invisible..."
-                    ></textarea>
                 </div>
 
                 <div class="use-cases">
-                    <h3>Common Use Cases</h3>
+                    <h3>Popular Use Cases</h3>
                     <div class="use-case">
-                        <h4>Discord Empty Messages</h4>
-                        <p>Send "empty" messages in Discord channels that appear completely blank.</p>
+                        <h4>Discord Names</h4>
+                        <p>Create invisible Discord usernames or server names</p>
                     </div>
                     <div class="use-case">
-                        <h4>Social Media Spacing</h4>
-                        <p>Create invisible line breaks and spacing in Instagram, Twitter, and Facebook posts.</p>
-                    </div>
-                    <div class="use-case">
-                        <h4>Username Tricks</h4>
-                        <p>Create unique usernames that appear blank or add invisible characters to existing names.</p>
+                        <h4>Social Media</h4>
+                        <p>Bypass minimum character requirements on posts</p>
                     </div>
                     <div class="use-case">
                         <h4>Text Formatting</h4>
-                        <p>Add invisible spacing and formatting to text documents and messages.</p>
+                        <p>Create invisible spacing and alignment in text</p>
+                    </div>
+                    <div class="use-case">
+                        <h4>Web Development</h4>
+                        <p>Testing edge cases and empty state handling</p>
                     </div>
                 </div>
 
                 <div class="text-gray-400 text-sm">
-                    <p>💡 Tips: Different platforms handle Unicode characters differently. Zero Width Space (U+200B) works best for most applications.</p>
+                    <p>💡 Tips: These invisible characters work across most platforms that support Unicode. They appear empty but contain actual characters.</p>
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- FAQ Section -->
+    <section class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="bg-gray-900 rounded-3xl p-8">
+            <h2 class="text-3xl font-bold text-center text-purple-400 mb-8">Frequently Asked Questions</h2>
+            
+            <div class="space-y-6">
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">What is Blank Text Generator?</h3>
+                    <p class="text-gray-300">Blank Text Generator creates invisible Unicode characters that appear empty but contain hidden text. Perfect for Discord, social media, and creating seemingly empty messages that bypass text requirements.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Why use Blank Text?</h3>
+                    <p class="text-gray-300">Blank text is useful for creating empty Discord names, bypassing minimum character requirements, creating invisible separators, testing applications, and creative text formatting on social media platforms.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">When should I use Blank Text Generator?</h3>
+                    <p class="text-gray-300">Use blank text when you need to create empty-looking content that still contains characters, bypass form validation, create invisible placeholders, test applications, or achieve specific formatting effects.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Where can I use Blank Text?</h3>
+                    <p class="text-gray-300">Blank text works on Discord, social media platforms, websites, forums, messaging apps, and any system that supports Unicode characters. It's particularly popular for Discord usernames and social media posts.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Who uses Blank Text Generator?</h3>
+                    <p class="text-gray-300">Gamers, social media users, Discord community managers, web developers, content creators, and anyone who needs to create invisible text or bypass character requirements use our blank text generator.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">How do I use the Blank Text Generator?</h3>
+                    <p class="text-gray-300">Select your preferred invisible character type, choose the length, and click generate. The invisible text will be created and you can copy it to use anywhere that supports Unicode characters.</p>
+                </div>
+
+                <div class="border-l-4 border-purple-400 pl-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Are blank characters safe to use?</h3>
+                    <p class="text-gray-300">Yes, these are standard Unicode characters that are safe to use across all platforms. They don't contain any malicious code and are simply invisible formatting characters recognized by the Unicode standard.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Tools Section -->
+    <section class="container mx-auto px-4 py-8 max-w-6xl">
+        <div class="bg-gray-900 rounded-3xl p-8">
+            <h2 class="text-3xl font-bold text-center text-purple-400 mb-8">Related Unicode Tools</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./unicode-text-cleaner.html" class="hover:text-purple-400">Unicode Text Cleaner</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Clean and normalize Unicode text by removing unwanted invisible characters and formatting.</p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./fancy-text.html" class="hover:text-purple-400">Fancy Text Generator</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Transform text into stylish Unicode fonts and decorative characters for social media.</p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./zalgo-text.html" class="hover:text-purple-400">Zalgo Text Generator</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Create creepy, glitched text effects using Unicode combining characters.</p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./emoji-text-generator.html" class="hover:text-purple-400">Emoji Text Generator</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Add emojis between letters and words for creative text formatting.</p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./upside-down-emoji.html" class="hover:text-purple-400">Upside Down Emoji</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Flip and rotate emojis for unique visual effects in your messages.</p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 hover:bg-gray-700 transition-colors">
+                    <h3 class="text-xl font-semibold text-white mb-3">
+                        <a href="./strikethrough-text.html" class="hover:text-purple-400">Strikethrough Text</a>
+                    </h3>
+                    <p class="text-gray-300 text-sm">Add strikethrough effects to your text using Unicode combining characters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
         const blankCharacters = {
@@ -309,8 +494,8 @@
             'zero-width-non-joiner': '\u200C',
             'zero-width-joiner': '\u200D',
             'word-joiner': '\u2060',
-            'invisible-separator': '\u2061',
-            'invisible-times': '\u2062'
+            'invisible-separator': '\u2063',
+            'function-application': '\u2061'
         };
 
         let currentBlankType = 'zero-width-space';
@@ -329,12 +514,12 @@
         }
 
         function setLength(length) {
-            document.getElementById('blankLength').value = length;
+            document.getElementById('lengthInput').value = length;
             generateBlankText();
         }
 
         function generateBlankText() {
-            const length = parseInt(document.getElementById('blankLength').value);
+            const length = parseInt(document.getElementById('lengthInput').value);
             const previewText = document.getElementById('previewText');
             const copyIndicator = document.getElementById('copyIndicator');
             
@@ -353,7 +538,7 @@
             copyIndicator.textContent = `${length} chars ready`;
         }
 
-        function copyBlankText() {
+        function copyToClipboard() {
             if (!generatedBlankText) {
                 generateBlankText();
             }
@@ -409,7 +594,7 @@
             }
         });
 
-        document.getElementById('blankLength').addEventListener('input', generateBlankText);
+        document.getElementById('lengthInput').addEventListener('input', generateBlankText);
         
         // Initialize
         generateBlankText();
