@@ -147,16 +147,7 @@
     </style>
 </head>
 <body class="bg-black text-gray-200 font-sans">
-    <!-- Breadcrumb Navigation -->
-    <nav class="bg-gray-800 py-2">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center space-x-2 text-sm text-gray-300">
-                <a href="./index.html" class="hover:text-purple-400 transition-colors">Home</a>
-                <span>/</span>
-                <span class="text-purple-400">Binary Text Converter</span>
-            </div>
-        </div>
-    </nav>
+   
 
     <nav class="bg-black border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -195,6 +186,22 @@
         </div>
     </nav>
 
+    <!-- Breadcrumb Navigation -->
+    <nav class="bg-gray-800 py-3" aria-label="Breadcrumb">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <ol class="flex items-center space-x-2 text-sm">
+                <li>
+                    <a href="./index.html" class="text-gray-400 hover:text-purple-400 transition-colors">Home</a>
+                </li>
+                <li class="text-gray-500">/</li>
+                <li>
+                    <span class="text-gray-300">Tools</span>
+                </li>
+                <li class="text-gray-500">/</li>
+                <li class="text-purple-400 font-medium" aria-current="page">Text ↔ Binary Converter</li>
+            </ol>
+        </div>
+    </nav>
     <main class="container mx-auto px-4 py-8">
         <div class="relative w-full max-w-4xl text-center mx-auto bg-gradient-to-br from-gray-800 to-[#cb6ce6]/80 rounded-3xl p-[2px] font-mono">
             <h1 class="w-full mt-10 mb-8 text-2xl sm:text-4xl text-gray-200 font-medium">Text ↔ Binary Converter</h1>
